@@ -1,0 +1,10 @@
+﻿<Application x:Class="Templater.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Templater"
+             xmlns:vm ="clr-namespace:Templater.ViewModels"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <vm:ViewModelLocator x:Key="Locator"/>
+    </Application.Resources>
+</Application>
