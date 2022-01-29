@@ -4,6 +4,8 @@
 О проекте:
   .net core 5.0 WPF + MVVW + DependencyInjection + SQLite
   
+  <br /><br />
+  
 Проект Templater (Основной проект (WPF) ):
   Data:
     инициализатор базы данных
@@ -34,10 +36,12 @@
   MainWindow.xaml
     основное представление
     
+    <br /><br />
     
 Проект Templater.DTO (библиатека классов):    
     Все классы для БД и не только (models)
     
+    <br /><br />
     
 Проект Templater.SQLite (библиатека классов):    
     Context
@@ -45,3 +49,5 @@
         класс для управления бд (можно использовать LazyLoading)
       Migrations
         изменения струтуры бд
+        
+<br /><br />
