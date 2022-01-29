@@ -1,53 +1,53 @@
 # Templater
 Шаблонизатор для стажировки GeekBrains
 
-О проекте:
-  .net core 5.0 WPF + MVVW + DependencyInjection + SQLite
+<p>О проекте: </p>
+<p>.net core 5.0 WPF + MVVW + DependencyInjection + SQLite</p>
   
 <br /><br />
   
-Проект Templater (Основной проект (WPF) ):
-  Data:
-    инициализатор базы данных
+<p>Проект Templater (Основной проект (WPF) ):</p>
+<p>Data:</p>
+<p>инициализатор базы данных</p>
     
-  Docs:
-    готовые документы
+<p>Docs:</p>
+<p>готовые документы</p>
     
-  Infrastructure:
-    Commands:
-      обработчики событий кнопок
-    Interfaces:
-      интерфесы для сервисов
-    Services:
-      сервисы
+<p>Infrastructure:</p>
+<p>Commands:</p>
+<p>обработчики событий кнопок</p>
+<p>Interfaces:</p>
+<p>интерфесы для сервисов</p>
+<p>Services:</p>
+<p>сервисы</p>
       
-  Templates:
-    документы - шаблоны
+<p>Templates:</p>
+<p>документы - шаблоны</p>
     
-  ViewModels:
-    хранеие моделей-представлений - для связывания с представлениями
+<p>ViewModels:</p>
+<p>хранеие моделей-представлений - для связывания с представлениями</p>
     
-  Views:
-    частичные представления
+<p>Views:</p>
+<p>частичные представления</p>
     
-  App.xaml
-    файлы для внедрения зависимостей
+<p>App.xaml</p>
+<p>файлы для внедрения зависимостей</p>
   
-  MainWindow.xaml
-    основное представление
+<p>MainWindow.xaml</p>
+<p>основное представление</p>
     
 <br /><br />
     
-Проект Templater.DTO (библиатека классов):    
-    Все классы для БД и не только (models)
+<p>Проект Templater.DTO (библиатека классов):</p>
+<p>Все классы для БД и не только (models)</p>
     
 <br /><br />
     
-Проект Templater.SQLite (библиатека классов):    
-    Context
-      TeplaterSQLDB.cs
-        класс для управления бд (можно использовать LazyLoading)
-      Migrations
-        изменения струтуры бд
+<p>Проект Templater.SQLite (библиатека классов):</p>    
+<p>Context</p>
+<p>TeplaterSQLDB.cs</p>
+<p>класс для управления бд (можно использовать LazyLoading)</p>
+<p>Migrations</p>
+<p>изменения струтуры бд</p>
         
 <br /><br />
