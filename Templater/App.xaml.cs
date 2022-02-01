@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
+using Templater.Data;
 using Templater.ViewModels;
+using Teplater.SQLite.Context;
 
 namespace Templater
 {
@@ -24,7 +26,18 @@ namespace Templater
         {
             services.AddSingleton<MainWindowViewModel>(); //создаём объект MainWindowViewModel 1 раз
 
+            services.AddDbContext<TeplaterSQLDB>();
+
+            services.AddTransient<TemplaterDbInitializer>();
+
             //services.AddTransient<IMailService, DebugMailService>(); //создаём объект IMailService(DebugMailService) каждый раз новые
+
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Services.GetRequiredService<TemplaterDbInitializer>().Initialize();
+            base.OnStartup(e);
 
         }
     }
