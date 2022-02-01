@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
 using Templater.Data;
+using Templater.Infrastructure.Services.InDB;
 using Templater.ViewModels;
 using Teplater.SQLite.Context;
 
@@ -29,6 +30,10 @@ namespace Templater
             services.AddDbContext<TeplaterSQLDB>();
 
             services.AddTransient<TemplaterDbInitializer>();
+
+            services.AddTransient<DocumentDBStore>();
+
+            services.AddTransient<TemplateDBStore>();
 
             //services.AddTransient<IMailService, DebugMailService>(); //создаём объект IMailService(DebugMailService) каждый раз новые
 

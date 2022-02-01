@@ -11,8 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Services\" />
-    <Folder Include="Infrastructure\Interfaces\" />
     <Folder Include="Templates\" />
     <Folder Include="Docs\" />
   </ItemGroup>
