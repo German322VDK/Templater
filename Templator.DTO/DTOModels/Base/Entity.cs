@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Templator.DTO.Base
+namespace Templator.DTO.DTOModels.Base
 {
     public class Entity
     {
