@@ -14,6 +14,6 @@ namespace Templator.DTO.DTOModels
 
         public DateTime DateTimeInitial { get; set; } = DateTime.Now;
 
-        public virtual MarkValue Values { get; set; }
+        public virtual MarkValues Values { get; set; }
     }
 }

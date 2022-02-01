@@ -20,16 +20,15 @@ namespace Teplater.SQLite.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MarkValue",
+                name: "MarkValues",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Value = table.Column<string>(type: "TEXT", nullable: true)
+                        .Annotation("Sqlite:Autoincrement", true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MarkValue", x => x.Id);
+                    table.PrimaryKey("PK_MarkValues", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,6 +72,26 @@ namespace Teplater.SQLite.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MarkValue",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Value = table.Column<string>(type: "TEXT", nullable: true),
+                    MarkValuesId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MarkValue", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MarkValue_MarkValues_MarkValuesId",
+                        column: x => x.MarkValuesId,
+                        principalTable: "MarkValues",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Documents",
                 columns: table => new
                 {
@@ -88,9 +107,9 @@ namespace Teplater.SQLite.Migrations
                 {
                     table.PrimaryKey("PK_Documents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Documents_MarkValue_ValuesId",
+                        name: "FK_Documents_MarkValues_ValuesId",
                         column: x => x.ValuesId,
-                        principalTable: "MarkValue",
+                        principalTable: "MarkValues",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -117,6 +136,11 @@ namespace Teplater.SQLite.Migrations
                 column: "MarkKeysId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MarkValue_MarkValuesId",
+                table: "MarkValue",
+                column: "MarkValuesId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Templates_KeysId",
                 table: "Templates",
                 column: "KeysId");
@@ -135,6 +159,9 @@ namespace Teplater.SQLite.Migrations
 
             migrationBuilder.DropTable(
                 name: "Templates");
+
+            migrationBuilder.DropTable(
+                name: "MarkValues");
 
             migrationBuilder.DropTable(
                 name: "MarkKeys");
