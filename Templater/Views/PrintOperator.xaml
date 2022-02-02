@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Templater.Views.PrintOperator"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Templater.Views"
+             xmlns:fa="http://schemas.fontawesome.com/icons/"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280">
+    <Grid>
+        <GroupBox Header="Документы на печать" FontSize="16" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Margin="0, 150, 0, 20" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                        <StackPanel Orientation="Horizontal" ToolTip="Отправка документа в реестр печати" HorizontalAlignment="Left">
+                            <fa:ImageAwesome Icon="Regular_ListAlt" Height="25" Margin="0,0,20,0" Foreground="#FF014BFF"/>
+                            <TextBlock Text="Отправка в реестр" FontSize="18"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Row="1" Margin="0, 20" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                        <StackPanel Orientation="Horizontal" ToolTip="Печать документа" HorizontalAlignment="Left">
+                            <fa:ImageAwesome Icon="Solid_Print" Height="25" Margin="0,0,20,0" Foreground="#FF0B9600"/>
+                            <TextBlock Text="Печать" FontSize="18"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Row="2" Margin="0, 20" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                        <StackPanel Orientation="Horizontal" ToolTip="Документ забракован" HorizontalAlignment="Left">
+                            <fa:ImageAwesome Icon="Solid_Times" Height="25" Margin="0,0,20,0" Foreground="OrangeRed"/>
+                            <TextBlock Text="Забраковать" FontSize="18"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <GroupBox Grid.Column="2" Header="Документы в реестре печати" FontSize="13" Width="300" Margin="10">
+                    <ListBox Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
+                </GroupBox>
+                <GroupBox Header="Список документов на печать" FontSize="13" Width="300" Margin="10">
+                    <ListBox Padding="15, 5, 0, 5" Margin="5,5,5,5"  SelectionMode="Multiple"/>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
+</UserControl>

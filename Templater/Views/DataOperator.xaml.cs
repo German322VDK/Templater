@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Templater.Views
 {
     /// <summary>
-    /// Логика взаимодействия для Authorization.xaml
+    /// Логика взаимодействия для DataOperator.xaml
     /// </summary>
-    public partial class Authorization : UserControl
+    public partial class DataOperator : UserControl
     {
-        public Authorization()
+        public DataOperator()
         {
             InitializeComponent();
         }
