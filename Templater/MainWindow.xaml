@@ -10,6 +10,6 @@
         Title="{Binding Title}"  
         Height="450" Width="800">
     <Grid>
-
+        <TextBlock>Test</TextBlock>
     </Grid>
 </Window>
