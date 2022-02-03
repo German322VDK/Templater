@@ -1,0 +1,77 @@
+﻿<Window x:Class="Templater.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Templater"
+        xmlns:v="clr-namespace:Templater.Views"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        DataContext="{Binding MainWindowModel, Source= {StaticResource Locator}}"
+        mc:Ignorable="d"
+        Title="{Binding Title}"  
+        Height="720" Width="1280">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть"/>
+                <MenuItem Header="Печать"/>
+                <Separator/>
+                <MenuItem Header="Выход" Click="Exit_Template" />
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="Помощь"/>
+                <MenuItem Header="О программе"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem HorizontalAlignment="Right">
+                <ResizeGrip/>
+            </StatusBarItem>
+        </StatusBar>
+        <TabControl Name="TbControl">
+            <TabItem x:Name="authorization">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Width="220"  TextAlignment="Center" Foreground="#FFFF5D00" FontSize="16" FontWeight="Bold">Авторизация</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="0, 0, 0, 20"  Text="Выберите пользователя" VerticalAlignment="Bottom" FontSize="18" FontWeight="Bold"/>
+                    <ComboBox  HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Width="200" Height="38" Margin="0, 20, 0, 0" Padding="0, 5, 0, 0" VerticalAlignment="Top" FontSize="18">
+                        <ComboBoxItem x:Name="CbDataOperator"  HorizontalAlignment="Center" Selected="CbDataOperator_Selected" >Оператор данных</ComboBoxItem>
+                        <ComboBoxItem x:Name="CbPrintOperator" HorizontalAlignment="Center" Selected="CbPrintOperator_Selected">Оператор печати</ComboBoxItem>
+                        <ComboBoxItem x:Name="CbAdministrator" HorizontalAlignment="Center" Selected="CbAdministrator_Selected">Администратор</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="DataOperator">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Width="220"  TextAlignment="Center" Foreground="#FF2FB700" FontSize="16" FontWeight="Bold">Оператор данных</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <v:DataOperator/>
+            </TabItem>
+            <TabItem x:Name="PrintOperator">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Width="220"  TextAlignment="Center" Foreground="#FF2FB700" FontSize="16" FontWeight="Bold">Оператор печати</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <v:PrintOperator/>
+            </TabItem>
+            <TabItem x:Name="Administrator">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Width="220"  TextAlignment="Center" Foreground="#FF1300FF" FontSize="16" FontWeight="Bold">Администратор</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <v:Administrator/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

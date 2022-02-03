@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Templater
+namespace Templater.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для PrintOperator.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PrintOperator : UserControl
     {
-        public MainWindow()
+        public PrintOperator()
         {
             InitializeComponent();
         }
