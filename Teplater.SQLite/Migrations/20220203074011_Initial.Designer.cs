@@ -9,7 +9,7 @@ using Teplater.SQLite.Context;
 namespace Teplater.SQLite.Migrations
 {
     [DbContext(typeof(TeplaterSQLDB))]
-    [Migration("20220201042311_Initial")]
+    [Migration("20220203074011_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

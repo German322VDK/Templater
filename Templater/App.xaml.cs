@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Windows;
@@ -17,9 +18,14 @@ namespace Templater
         private static IHost _hosting;
 
         public static IHost Hosting => _hosting
-            ??= Host.CreateDefaultBuilder(Environment.GetCommandLineArgs())
-            .ConfigureServices(ConfigureServices)
+            ??= CreateHostBuilder(Environment.GetCommandLineArgs())
             .Build();
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+           Host.CreateDefaultBuilder(args)
+              .ConfigureAppConfiguration(opt => opt.AddJsonFile("appsettings.json", false, true))
+              .ConfigureServices(ConfigureServices)
+           ;
 
         public static IServiceProvider Services => Hosting.Services;
 
