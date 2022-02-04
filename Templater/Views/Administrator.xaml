@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Templater.Views"
              xmlns:fa="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -23,6 +23,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <ComboBox Margin="30, 10, 0, 10"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="180" Height="30" Padding="0, 5, 0, 0" VerticalAlignment="Center" FontSize="14">
                             <ComboBoxItem HorizontalAlignment="Center">Новые файлы</ComboBoxItem>
@@ -30,10 +31,25 @@
                             <ComboBoxItem HorizontalAlignment="Center">Готовые к печати</ComboBoxItem>
                             <ComboBoxItem HorizontalAlignment="Center">Отложенные файлы</ComboBoxItem>
                             <ComboBoxItem HorizontalAlignment="Center">Распечатанные файлы</ComboBoxItem>
+                            <ComboBoxItem HorizontalAlignment="Center">Очередь печати</ComboBoxItem>
                         </ComboBox>
 
-                        <ListBox Grid.Row="1" Padding="15, 5, 0, 5" Margin="5,5,5,5" HorizontalAlignment="Center"
-                                    DisplayMemberPath="Title" Width="300"/>
+                        <ListBox Grid.Row="1" Padding="15, 5, 0, 5" Margin="5,5,5,5" HorizontalAlignment="Center" Width="300">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <CheckBox Content="X"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <Button x:Name="BtWord" Height="34" Grid.Row="2" Margin="0,20,0,20" HorizontalAlignment="Center" Width="270" Background="Transparent" BorderThickness="1" Click="BtWord_Click">
+                            <StackPanel Orientation="Horizontal" ToolTip="Просмотр документа в редакторе" HorizontalAlignment="Left">
+                                <fa:ImageAwesome Icon="Regular_FileWord" Height="24" Margin="0,0,20,0" Foreground="#FF1300FF"/>
+                                <TextBlock Text="Просмотр документа" FontSize="18"/>
+                            </StackPanel>
+                        </Button>
                     </Grid>
                 </GroupBox>
             </Grid>
@@ -76,7 +92,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <GroupBox Grid.Column="1" Header="Документ" FontSize="16" Margin="10, 0, 0, 0">
+        <GroupBox Grid.Column="1" Header="Шаблон" FontSize="16" Margin="10, 0, 0, 0">
             <DockPanel>
                 <Grid DockPanel.Dock="Top">
                     <Grid.ColumnDefinitions>
@@ -93,9 +109,7 @@
                         </StackPanel>
                     </Button>
                 </Grid>
-                <GroupBox Header="Файл" FontSize="13" Margin="10, 0, 10, 10">
-                    <TextBox/>
-                </GroupBox>
+                <GroupBox Header="Данные шаблона" FontSize="13" Margin="10, 0, 10, 10"/>
             </DockPanel>
         </GroupBox>
     </Grid>
