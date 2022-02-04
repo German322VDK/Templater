@@ -70,7 +70,7 @@ namespace Templater.Infrastructure.Services.InDB
                 var temp = GetById(item.Id);
 
                 temp.FileName = item.FileName;
-                temp.Keys = item.Keys;
+                temp.JSONKeys = item.JSONKeys;
 
                 _db.SaveChanges();
 

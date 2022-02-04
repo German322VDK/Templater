@@ -73,7 +73,7 @@ namespace Templater.Infrastructure.Services.InDB
 
                 doc.Template = item.Template;
 
-                doc.Values = item.Values;
+                doc.JSONValues = item.JSONValues;
 
                 doc.DateTimeInitial = item.DateTimeInitial;
 

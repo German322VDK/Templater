@@ -6,6 +6,7 @@ namespace Templator.DTO.DTOModels
     {
         public string FileName { get; set; }
 
-        public virtual MarkKeys Keys { get; set; }
+        //ICollection<string>
+        public string JSONKeys { get; set; }
     }
 }
