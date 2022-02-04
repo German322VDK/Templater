@@ -13,32 +13,46 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition/>                    
                 </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="0, 20"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Width" Value="270"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                </Grid.Resources>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Margin="0, 150, 0, 20" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                    <Button Grid.Row="0">
                         <StackPanel Orientation="Horizontal" ToolTip="Отправка документа в реестр печати" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Regular_ListAlt" Height="25" Margin="0,0,20,0" Foreground="#FF014BFF"/>
                             <TextBlock Text="Отправка в реестр" FontSize="18"/>
                         </StackPanel>
                     </Button>
-                    <Button Grid.Row="1" Margin="0, 20" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                    <Button Grid.Row="1">
                         <StackPanel Orientation="Horizontal" ToolTip="Печать документа" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Solid_Print" Height="25" Margin="0,0,20,0" Foreground="#FF0B9600"/>
                             <TextBlock Text="Печать" FontSize="18"/>
                         </StackPanel>
                     </Button>
-                    <Button Grid.Row="2" Margin="0, 20" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                    <Button Grid.Row="2">
                         <StackPanel Orientation="Horizontal" ToolTip="Документ забракован" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Solid_Times" Height="25" Margin="0,0,20,0" Foreground="OrangeRed"/>
                             <TextBlock Text="Забраковать" FontSize="18"/>
                         </StackPanel>
                     </Button>
+                    <GroupBox Grid.Row="3" Header="Реестры в печати" FontSize="13" Width="300" Margin="10">
+                        <ListBox Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
+                    </GroupBox>
                 </Grid>
                 <GroupBox Grid.Column="2" Header="Документы в реестре печати" FontSize="13" Width="300" Margin="10">
                     <ListBox Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
