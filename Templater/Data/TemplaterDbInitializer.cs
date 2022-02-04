@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +18,12 @@ namespace Templater.Data
 
         public void Initialize()
         {
+            var db = _db.Database;
 
+            if (db.GetPendingMigrations().Any())
+            {
+                db.Migrate();
+            }
         }
     }
 }
