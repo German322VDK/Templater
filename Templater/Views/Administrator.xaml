@@ -112,7 +112,7 @@
                 <GroupBox Header="Данные шаблона" FontSize="13" Margin="10">
                     <Grid>                        
                         <DataGrid Grid.Row="0" AutoGenerateColumns="False"
-                            Margin="10, 20"
+                            Margin="10, 20, 10, 10"
                             GridLinesVisibility="Vertical"
                             VerticalGridLinesBrush="DarkGray"
                             RowHeight="22"
