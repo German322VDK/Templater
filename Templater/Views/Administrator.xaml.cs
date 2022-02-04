@@ -39,7 +39,14 @@ namespace Templater.Views
             var application = new Word.Application();
             var document = new Word.Document();
             document = application.Documents.Add();
-            application.Visible = true;            
+            application.Visible = true;
+
+            ////более универсальный способ открытия любого файла дефолтным приложением 
+            //string file = @"...data.docx";
+            //var proc = new Process();
+            //proc.StartInfo.FileName = file;
+            //proc.StartInfo.UseShellExecute = true;
+            //proc.Start();
         }
     }
 }
