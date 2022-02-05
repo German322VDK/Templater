@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DocumentFormat.OpenXml.Packaging;
+using System.Collections.Generic;
 
 namespace Templater.Infrastructure.Methods
 {
@@ -35,6 +36,14 @@ namespace Templater.Infrastructure.Methods
             }
 
             return strs;
+        }
+
+        public static string GetTextFromWord(string filePath)
+        {
+            using (var word = WordprocessingDocument.Open(filePath, false))
+            {
+                return word.MainDocumentPart.Document.Body.InnerText;
+            }
         }
     }
 }
