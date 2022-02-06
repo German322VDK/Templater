@@ -40,7 +40,22 @@
                     <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="1">
-                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
+                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5" Name="ValidTemplates" 
+                             ItemsSource="{Binding Templates}"
+                             SelectedItem="{Binding SelectedTemplate}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FileName}"/>
+                                    <Button DataContext="{Binding DataOperatorModel, Source= {StaticResource Locator}}" 
+                                            Command="{Binding OpenFile}"
+                                            Margin="5, 0">
+                                        <fa:ImageAwesome Icon="Regular_FileWord" Height="15"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
                 <GroupBox Grid.ColumnSpan="2" Grid.Row="2" Header="Данные для документа" Padding="5" FontSize="13" Margin="5, 10, 5, 10">
                     <TextBox Height="200" VerticalContentAlignment="Center" AcceptsReturn="True" AcceptsTab="True"/>
