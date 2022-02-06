@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Templater.Infrastructure.Methods
 {
@@ -44,6 +45,15 @@ namespace Templater.Infrastructure.Methods
             {
                 return word.MainDocumentPart.Document.Body.InnerText;
             }
+        }
+
+        public static void OpenWord(string filePath)
+        {
+            //более универсальный способ открытия любого файла дефолтным приложением 
+            var proc = new Process();
+            proc.StartInfo.FileName = filePath;
+            proc.StartInfo.UseShellExecute = true;
+            proc.Start();
         }
     }
 }
