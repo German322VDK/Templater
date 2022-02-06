@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace Templater.Infrastructure.Methods
 {
@@ -47,11 +48,12 @@ namespace Templater.Infrastructure.Methods
             }
         }
 
+        //более универсальный способ открытия любого файла дефолтным приложением 
         public static void OpenWord(string filePath)
         {
-            //более универсальный способ открытия любого файла дефолтным приложением 
+            var path = Path.GetFullPath(filePath);
             var proc = new Process();
-            proc.StartInfo.FileName = filePath;
+            proc.StartInfo.FileName = path;
             proc.StartInfo.UseShellExecute = true;
             proc.Start();
         }
