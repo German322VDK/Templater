@@ -7,7 +7,7 @@
              xmlns:fa="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280"
-             DataContext="{}">
+             DataContext="{Binding AdministratorModel, Source= {StaticResource Locator}}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -19,7 +19,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <GroupBox Grid.Column="0" Header="Выбор файлов" FontSize="16">
+                <GroupBox Grid.Column="0" Header="{Binding Title1}" FontSize="16">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
@@ -93,7 +93,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <GroupBox Grid.Column="1" Header="Шаблон" FontSize="16" Margin="10, 0, 0, 0">
+        <GroupBox Grid.Column="1" Header="{Binding Title2}" FontSize="16" Margin="10, 0, 0, 0">
             <DockPanel>
                 <Grid DockPanel.Dock="Top">
                     <Grid.ColumnDefinitions>

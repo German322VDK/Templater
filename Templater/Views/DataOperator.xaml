@@ -6,13 +6,14 @@
              xmlns:local="clr-namespace:Templater.Views"
              xmlns:fa="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d" 
+             DataContext="{Binding DataOperatorModel, Source= {StaticResource Locator}}"
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <GroupBox Header="Проверка данных" FontSize="16" Margin="10, 0, 0, 0">
+        <GroupBox Header="{Binding Title1}" FontSize="16" Margin="10, 0, 0, 0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -46,7 +47,7 @@
                 </GroupBox>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Column="1" Header="Документ" FontSize="16" Margin="10, 0, 0, 0">
+        <GroupBox Grid.Column="1" Header="{Binding Title2}" FontSize="16" Margin="10, 0, 0, 0">
             <DockPanel>
                 <Grid DockPanel.Dock="Top">
                     <Grid.ColumnDefinitions>

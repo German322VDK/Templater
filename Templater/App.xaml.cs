@@ -31,7 +31,13 @@ namespace Templater
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<MainWindowViewModel>(); //создаём объект MainWindowViewModel 1 раз
+            services.AddSingleton<MainWindowViewModel>(); 
+
+            services.AddSingleton<AdministratorViewModel>(); 
+
+            services.AddSingleton<PrintOperatorViewModel>(); 
+
+            services.AddSingleton<DataOperatorViewModel>(); 
 
             services.AddDbContext<TeplaterSQLDB>();
 

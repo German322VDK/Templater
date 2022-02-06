@@ -7,10 +7,10 @@ using Templater.ViewModels.Base;
 
 namespace Templater.ViewModels
 {
-    public class AdministratorViewModel : ViewModel
+    public class DataOperatorViewModel : ViewModel
     {
-        public string Title1 { get; } = "Выбор файлов";
+        public string Title1 { get; } = "Проверка данных";
 
-        public string Title2 { get; } = "Шаблон";
+        public string Title2 { get; } = "Документ";
     }
 }

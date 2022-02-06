@@ -6,9 +6,10 @@
              xmlns:local="clr-namespace:Templater.Views"
              xmlns:fa="http://schemas.fontawesome.com/icons/"
              mc:Ignorable="d" 
+             DataContext="{Binding PrintOperatorModel, Source= {StaticResource Locator}}"
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
-        <GroupBox Header="Документы на печать" FontSize="16" Margin="5">
+        <GroupBox Header="{Binding Title}" FontSize="16" Margin="5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

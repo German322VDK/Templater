@@ -7,10 +7,8 @@ using Templater.ViewModels.Base;
 
 namespace Templater.ViewModels
 {
-    public class AdministratorViewModel : ViewModel
+    public class PrintOperatorViewModel : ViewModel
     {
-        public string Title1 { get; } = "Выбор файлов";
-
-        public string Title2 { get; } = "Шаблон";
+        public string Title { get; } = "Документы на печать";
     }
 }
