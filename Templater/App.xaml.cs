@@ -6,6 +6,7 @@ using System.Windows;
 using Templater.Data;
 using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Services.InDB;
+using Templater.Infrastructure.Services.InMemory;
 using Templater.ViewModels;
 using Templator.DTO.DTOModels;
 using Teplater.SQLite.Context;
@@ -33,13 +34,15 @@ namespace Templater
 
         private static void ConfigureServices(HostBuilderContext host, IServiceCollection services)
         {
-            services.AddSingleton<MainWindowViewModel>(); 
+            services.AddSingleton<MainWindowViewModel>();
 
-            services.AddSingleton<AdministratorViewModel>(); 
+            services.AddSingleton<AdministratorViewModel>();
 
-            services.AddSingleton<PrintOperatorViewModel>(); 
+            services.AddSingleton<PrintOperatorViewModel>();
 
-            services.AddSingleton<DataOperatorViewModel>(); 
+            services.AddSingleton<DataOperatorViewModel>();
+
+            services.AddSingleton<DocumentsRepository>();
 
             services.AddDbContext<TeplaterSQLDB>();
 

@@ -44,5 +44,9 @@ namespace Templater.ViewModels
 
 
         }
+
+        public DataOperatorViewModel()
+        {
+        }
     }
 }

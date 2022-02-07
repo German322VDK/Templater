@@ -22,6 +22,6 @@ namespace Templater.ViewModels
         public MainWindowViewModel()
         {
 
-        }
+        }      
     }
 }

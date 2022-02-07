@@ -12,5 +12,7 @@ namespace Templater.ViewModels
         public string Title1 { get; } = "Выбор файлов";
 
         public string Title2 { get; } = "Шаблон";
+
+
     }
 }
