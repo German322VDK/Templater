@@ -16,7 +16,7 @@
                 <MenuItem Header="Открыть"/>
                 <MenuItem Header="Печать"/>
                 <Separator/>
-                <MenuItem Header="Выход" Click="Exit_Template" />
+                <MenuItem Header="Выход" Command="{StaticResource CloseAppCommand}"/>
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="Помощь"/>
@@ -64,7 +64,7 @@
                 </TabItem.Header>
                 <v:PrintOperator/>
             </TabItem>
-            <TabItem x:Name="Administrator">
+            <TabItem x:Name="Administrator" >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="5" Width="220"  TextAlignment="Center" Foreground="#FF1300FF" FontSize="16" FontWeight="Bold">Администратор</TextBlock>

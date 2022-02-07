@@ -25,8 +25,6 @@ namespace Templater
             InitializeComponent();
         }
 
-        private void Exit_Template(object sender, RoutedEventArgs e) => Close();
-
         private void CbDataOperator_Selected(object sender, RoutedEventArgs e) => TbControl.SelectedItem = DataOperator;
 
         private void CbPrintOperator_Selected(object sender, RoutedEventArgs e) => TbControl.SelectedItem = PrintOperator;
