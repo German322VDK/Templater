@@ -2,7 +2,7 @@
 Шаблонизатор для стажировки GeekBrains
 
 <p>О проекте: </p>
-<p>.net core 5.0 WPF + MVVW + DependencyInjection + SQLite</p>
+<p>.net core 5.0 WPF + MVVM + DependencyInjection + SQLite</p>
   
 <br /><br />
   
