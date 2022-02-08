@@ -15,8 +15,12 @@ namespace Templater.Infrastructure.Commands
             _CanExecute = CanExecute;
         }
 
-        public override bool CanExecute(object p) => _CanExecute?.Invoke(p) ?? true;
+        public override bool CanExecute(object parameter) => _CanExecute?.Invoke(parameter) ?? true;
 
-        public override void Execute(object p) => _Execute(p);
+        public override void Execute(object parameter)
+        {
+            if (CanExecute(parameter))
+                _Execute(parameter);
+        }
     }
 }

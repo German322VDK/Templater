@@ -16,7 +16,7 @@ namespace Templater.Infrastructure.Services.InMemory
             _Documents = Enumerable.Range(0, 100)
             .Select(i => new Document
             {
-                FileName = $"Документ №{i} "
+                
             })
             .ToList();
         }
