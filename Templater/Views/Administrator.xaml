@@ -45,7 +45,7 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
 
-                        <Button x:Name="BtWord" Height="34" Grid.Row="2" Margin="0,20,0,20" HorizontalAlignment="Center" Width="270" Background="Transparent" BorderThickness="1" Click="BtWord_Click">
+                        <Button Command="{Binding LoadWordCommand}" Height="34" Grid.Row="2" Margin="0,20,0,20" HorizontalAlignment="Center" Width="270" Background="Transparent" BorderThickness="1">
                             <StackPanel Orientation="Horizontal" ToolTip="Просмотр документа в редакторе" HorizontalAlignment="Left">
                                 <fa:ImageAwesome Icon="Regular_FileWord" Height="24" Margin="0,0,20,0" Foreground="#FF1300FF"/>
                                 <TextBlock Text="Просмотр документа" FontSize="18"/>
@@ -103,7 +103,7 @@
                     <GroupBox Grid.Column="0" Header="Заголовок" Padding="5" FontSize="13" Margin="10">
                         <TextBox Height="34" VerticalContentAlignment="Center"/>
                     </GroupBox>
-                    <Button x:Name="BtLoadTemplate"  Click="BtLoadTemplate_Click" Grid.Column="1" Margin="48,20,0,13" HorizontalAlignment="Left" Width="270" Background="Transparent" BorderThickness="1">
+                    <Button Command="{Binding LoadTemplaterWordCommand}" Grid.Column="1" Margin="48,20,0,13" HorizontalAlignment="Left" Width="270" Background="Transparent" BorderThickness="1">
                         <StackPanel Orientation="Horizontal" ToolTip="Загрузить пользовательский шаблон" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Regular_FolderOpen" Height="22" Margin="0,0,20,0" Foreground="#FF1300FF"/>
                             <TextBlock Text="Загрузить шаблон" FontSize="18"/>
