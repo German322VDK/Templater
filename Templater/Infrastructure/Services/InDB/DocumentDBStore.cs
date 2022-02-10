@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Templater.Infrastructure.Interfaces;
 using Templator.DTO.DTOModels;
+using Templator.DTO.Models;
 using Teplater.SQLite.Context;
 
 namespace Templater.Infrastructure.Services.InDB
@@ -76,6 +77,25 @@ namespace Templater.Infrastructure.Services.InDB
                 doc.JSONValues = item.JSONValues;
 
                 doc.DateTimeInitial = item.DateTimeInitial;
+
+                _db.SaveChanges();
+
+                _db.Database.CommitTransaction();
+            }
+
+            return true;
+        }
+
+        public bool Update(int id, Status status)
+        {
+            var item = GetById(id);
+
+            if (item is null || !_db.Documents.Contains(item))
+                return false;
+
+            using (_db.Database.BeginTransaction())
+            {
+                item.Status = status;
 
                 _db.SaveChanges();
 

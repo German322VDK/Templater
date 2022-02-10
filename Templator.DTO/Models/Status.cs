@@ -19,6 +19,8 @@ namespace Templator.DTO.Models
         //Забраковано
         Rejected = 4,
         //Закрыто
-        Closed = 5
+        Closed = 5,
+        //В очереди печати
+        InPrintedQueue = 6
     }
 }
