@@ -9,6 +9,8 @@ namespace Teplater.SQLite.Context
 
         public DbSet<Template> Templates { get; set; }
 
+        public DbSet<Solution> Solutions { get; set; }
+
         public TeplaterSQLDB(DbContextOptions<TeplaterSQLDB> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
