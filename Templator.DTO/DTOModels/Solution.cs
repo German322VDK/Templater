@@ -9,7 +9,7 @@ namespace Templator.DTO.DTOModels
 {
    public class Solution : Entity    //класс решения от робота
     {
-        public virtual Template Template { get; set; } //нужный нам шаблон
+        public string templateFileName { get; set; } //нужный нам шаблон
 
         public Dictionary<string, string> Data { get; set; } //данные (метка-значение)
     }
