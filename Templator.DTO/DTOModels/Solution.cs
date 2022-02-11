@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,13 @@ namespace Templator.DTO.DTOModels
     {
         public string templateFileName { get; set; } //нужный нам шаблон
 
-        public Dictionary<string, string> Data { get; set; } //данные (метка-значение)
+        public string Json { get; set; }
+
+        [NotMapped]
+        public Dictionary<string, string> Data
+        {
+            get { return JsonConvert.DeserializeObject<Dictionary<string, string>>(Json); }
+            set { Json = JsonConvert.SerializeObject(value); }
+        } //данные (метка-значение)
     }
 }
