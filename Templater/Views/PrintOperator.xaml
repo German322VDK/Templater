@@ -38,7 +38,17 @@
                         </StackPanel>
                     </Button>
                     <GroupBox Grid.Row="1" Header="Список документов на печать" FontSize="13" Width="300" Margin="10">
-                        <ListBox ItemsSource="{Binding Documents}" Padding="15, 5, 0, 5" Margin="5,5,5,5"  SelectionMode="Multiple"/>
+                        <ListBox ItemsSource="{Binding Documents}" 
+                                 SelectedItem="{Binding SelectedDocument}"
+                                 Padding="15, 5, 0, 5" Margin="5,5,5,5"  SelectionMode="Multiple">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding FileName}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </GroupBox>
                 </Grid>
                 <Grid Grid.Column="1">

@@ -119,7 +119,9 @@ namespace Templater.Infrastructure.Methods
 
                 }
 
-                app.ActiveDocument.SaveAs2(docFileName);
+                var newFile = new FileInfo(docFileName).FullName;
+
+                app.ActiveDocument.SaveAs2(newFile);
 
                 app.Quit();
 
