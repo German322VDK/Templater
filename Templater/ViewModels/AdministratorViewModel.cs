@@ -134,7 +134,7 @@ namespace Templater.ViewModels
         {
             _docs = docs;
 
-            documents = new ObservableCollection<Document>(_docs.GetAll());
+            documents = PrintOperatorViewModel.Documents;
 
             SelectedStatus = Statuses[1];
         }
