@@ -39,7 +39,7 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                        <TextBox Text="{Binding FileName}" IsReadOnly="True"/>
+                                        <TextBlock Text="{Binding FileName}"/>
                                         <CheckBox Content="X"/>
                                     </StackPanel>
                                 </DataTemplate>

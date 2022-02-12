@@ -44,23 +44,6 @@ namespace Teplater.SQLite.Migrations
                     b.ToTable("Documents");
                 });
 
-            modelBuilder.Entity("Templator.DTO.DTOModels.Solution", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Json")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("templateFileName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Solutions");
-                });
-
             modelBuilder.Entity("Templator.DTO.DTOModels.Template", b =>
                 {
                     b.Property<int>("Id")

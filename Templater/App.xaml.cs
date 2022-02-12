@@ -52,7 +52,7 @@ namespace Templater
 
             services.AddTransient<IStore<Template>, TemplateDBStore>();
 
-            services.AddTransient<IStore<Solution>, SolutionDBStore>();
+            //services.AddTransient<IStore<Solution>, SolutionDBStore>();
 
             //services.AddTransient<IMailService, DebugMailService>(); //создаём объект IMailService(DebugMailService) каждый раз новые
 

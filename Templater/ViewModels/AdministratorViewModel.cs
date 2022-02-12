@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
+using Templater.Infrastructure.Methods;
 using Templater.ViewModels.Base;
 using Templator.DTO.DTOModels;
 using Templator.DTO.Models;
@@ -88,21 +89,11 @@ namespace Templater.ViewModels
         public ICommand LoadWordCommand => _LoadWordCommand
             ??= new LambdaCommand(OnLoadWordCommandExecuted, CanLoadWordCommandExecute);
 
-        private bool CanLoadWordCommandExecute(object p) => true;
+        private bool CanLoadWordCommandExecute(object p) => SelectedDocument is not null;
 
         private void OnLoadWordCommandExecuted(object p)
         {
-            var application = new Microsoft.Office.Interop.Word.Application();
-            var document = new Microsoft.Office.Interop.Word.Document();
-            document = application.Documents.Add();
-            application.Visible = true;
-
-            ////более универсальный способ открытия любого файла дефолтным приложением 
-            //string file = @"...data.docx";
-            //var proc = new Process();
-            //proc.StartInfo.FileName = file;
-            //proc.StartInfo.UseShellExecute = true;
-            //proc.Start();
+            WordMethods.OpenWord($"Docs/{SelectedDocument.FileName}");
         }
 
         private Status GetStatus(string statuses)
