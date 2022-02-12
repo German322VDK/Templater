@@ -10,7 +10,7 @@
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="605"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <GroupBox Header="{Binding Title1}" FontSize="16" Margin="10, 0, 0, 0">
