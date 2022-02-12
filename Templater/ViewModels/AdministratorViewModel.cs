@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -17,13 +19,32 @@ using Templator.DTO.Models;
 
 namespace Templater.ViewModels
 {
-    public class AdministratorViewModel : ViewModel
+    public class AdministratorViewModel : ViewModel, INotifyPropertyChanged
     {
         public string Title1 { get; } = "Выбор файлов";
 
         public string Title2 { get; } = "Шаблон";
 
-        public string SelectedStatus { get; set; } 
+        private string _SelectedStatus;
+        public string SelectedStatus {
+            get { return _SelectedStatus; }
+            set
+            {
+                if (_SelectedStatus== value) return;
+                _SelectedStatus = value;
+                NotifyPropertyChanged("Documents");
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        // This method is called by the Set accessor of each property.  
+        // The CallerMemberName attribute that is applied to the optional propertyName  
+        // parameter causes the property name of the caller to be substituted as an argument.  
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
 
         public ObservableCollection<string> Statuses { get; set; } = new ObservableCollection<string>() 
         {
@@ -33,7 +54,7 @@ namespace Templater.ViewModels
         public Document SelectedDocument { get; set; }
 
         private ObservableCollection<Document> documents;
-        public ObservableCollection<Document> Documents 
+        public  ObservableCollection<Document> Documents 
         {
             get
             {
@@ -43,7 +64,7 @@ namespace Templater.ViewModels
                 if (SelectedStatus == "Все файлы")
                     return documents;
 
-                if (SelectedStatus == "Готовые к печати")
+                if (SelectedStatus == Statuses[2])
                     return new ObservableCollection<Document>(documents.Where(el => el.Status == Status.ReadyToPrint));
 
                 if (SelectedStatus == "Отложенные файлы")
