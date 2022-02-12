@@ -88,6 +88,7 @@ namespace Templater.ViewModels
             };
 
             _documents.Add(doc);
+            Documents.Add(doc);
 
             return WordMethods.CreateDoc($"Templates/{item.FileName}", $"Docs/{doc.FileName}", keyVal);
         }
