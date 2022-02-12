@@ -23,7 +23,7 @@ namespace Templater.ViewModels
 
         public string Title { get; } = "Документы на печать";        
 
-        public ObservableCollection<Document> Documents { get; } = new ();
+        public static ObservableCollection<Document> Documents { get; set; } = new ();
 
         private ICommand _LoadDocumentsСommand;
 
