@@ -19,7 +19,7 @@ using Templator.DTO.Models;
 
 namespace Templater.ViewModels
 {
-    public class AdministratorViewModel : ViewModel, INotifyPropertyChanged
+    public class AdministratorViewModel : ViewModel
     {
         public string Title1 { get; } = "Выбор файлов";
 
@@ -35,14 +35,14 @@ namespace Templater.ViewModels
                 NotifyPropertyChanged("Documents");
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
         // This method is called by the Set accessor of each property.  
         // The CallerMemberName attribute that is applied to the optional propertyName  
         // parameter causes the property name of the caller to be substituted as an argument.  
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            base.OnPropertyChanged(propertyName);
         }
 
 
@@ -89,20 +89,20 @@ namespace Templater.ViewModels
 
         private void OnLoadTemplaterWordCommandExecuted(object p)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var openFileDialog = new OpenFileDialog();
 
-            openFileDialog.ShowDialog();
+            //openFileDialog.ShowDialog();
 
-            //openFileDialog.Filter = "txt files (.docx)|.docx|All files (.)|.";
+            openFileDialog.Filter = "word files (*.docx)|*.docx|All files (*.*)|*.*";
 
-            //bool result = openFileDialog.ShowDialog() ?? false;
+            bool result = openFileDialog.ShowDialog() ?? false;
 
-            //if (!result)
-            //{
-            //    MessageBox.Show("Проблема с выбранным файлом", "Ошибка");
+            if (!result)
+            {
+                MessageBox.Show("Проблема с выбранным файлом", "Ошибка");
 
-            //    return;
-            //}
+                return;
+            }
         }
 
         private ICommand _LoadWordCommand;
