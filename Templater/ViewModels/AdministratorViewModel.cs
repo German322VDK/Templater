@@ -19,7 +19,7 @@ using Templator.DTO.Models;
 
 namespace Templater.ViewModels
 {
-    public class AdministratorViewModel : ViewModel, INotifyPropertyChanged
+    public class AdministratorViewModel : ViewModel
     {
         public string Title1 { get; } = "Выбор файлов";
 
@@ -35,14 +35,14 @@ namespace Templater.ViewModels
                 NotifyPropertyChanged("Documents");
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
         // This method is called by the Set accessor of each property.  
         // The CallerMemberName attribute that is applied to the optional propertyName  
         // parameter causes the property name of the caller to be substituted as an argument.  
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            base.OnPropertyChanged(propertyName);
         }
 
 
@@ -89,21 +89,23 @@ namespace Templater.ViewModels
 
         private void OnLoadTemplaterWordCommandExecuted(object p)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var openFileDialog = new OpenFileDialog();
 
-            openFileDialog.ShowDialog();
+            //openFileDialog.ShowDialog();
 
-            //openFileDialog.Filter = "txt files (.docx)|.docx|All files (.)|.";
+            openFileDialog.Filter = "word files (*.docx)|*.docx|All files (*.*)|*.*";
 
-            //bool result = openFileDialog.ShowDialog() ?? false;
+            bool result = openFileDialog.ShowDialog() ?? false;
 
-            //if (!result)
-            //{
-            //    MessageBox.Show("Проблема с выбранным файлом", "Ошибка");
+            if (!result)
+            {
+                MessageBox.Show("Проблема с выбранным файлом", "Ошибка");
 
-            //    return;
-            //}
+                return;
+            }
         }
+
+        #region Commands
 
         private ICommand _LoadWordCommand;
 
@@ -116,6 +118,80 @@ namespace Templater.ViewModels
         {
             WordMethods.OpenWord($"Docs/{SelectedDocument.FileName}");
         }
+
+        #region ReadyToPrint
+
+        private ICommand _getReadyToPrint;
+
+        public ICommand GetReadyToPrint => _getReadyToPrint
+            ??= new LambdaCommand(OnGetReadyToPrintCommandExecuted, CanGetReadyToPrintCommandExecute);
+
+        private bool CanGetReadyToPrintCommandExecute(object p) => SelectedDocument is not null;
+
+        private void OnGetReadyToPrintCommandExecuted(object p)
+        {
+            _docs.Update(SelectedDocument.Id, Status.ReadyToPrint);
+
+            Documents.SingleOrDefault(el => el.Id == SelectedDocument.Id).Status = Status.ReadyToPrint;
+        }
+
+        #endregion
+
+        #region Printed
+
+        private ICommand _getPrinted;
+
+        public ICommand GetPrinted => _getPrinted
+            ??= new LambdaCommand(OnGetPrintedCommandExecuted, CanGetPrintedCommandExecute);
+
+        private bool CanGetPrintedCommandExecute(object p) => SelectedDocument is not null;
+
+        private void OnGetPrintedCommandExecuted(object p)
+        {
+            _docs.Update(SelectedDocument.Id, Status.Printed);
+
+            Documents.SingleOrDefault(el => el.Id == SelectedDocument.Id).Status = Status.Printed;
+        }
+
+        #endregion
+
+        #region Deferred
+
+        private ICommand _getDeferred;
+
+        public ICommand GetDeferred => _getDeferred
+            ??= new LambdaCommand(OnGetDeferredCommandExecuted, CanGetDeferredCommandExecute);
+
+        private bool CanGetDeferredCommandExecute(object p) => SelectedDocument is not null;
+
+        private void OnGetDeferredCommandExecuted(object p)
+        {
+            _docs.Update(SelectedDocument.Id, Status.Deferred);
+
+            Documents.SingleOrDefault(el => el.Id == SelectedDocument.Id).Status = Status.Deferred;
+        }
+
+        #endregion
+
+        #region Closed
+
+        private ICommand _getClosed;
+
+        public ICommand GetClosed => _getClosed
+            ??= new LambdaCommand(OnGetClosedCommandExecuted, CanGetClosedCommandExecute);
+
+        private bool CanGetClosedCommandExecute(object p) => SelectedDocument is not null;
+
+        private void OnGetClosedCommandExecuted(object p)
+        {
+            _docs.Update(SelectedDocument.Id, Status.Closed);
+
+            Documents.SingleOrDefault(el => el.Id == SelectedDocument.Id).Status = Status.Closed;
+        }
+
+        #endregion
+
+        #endregion
 
         private Status GetStatus(string statuses)
         {

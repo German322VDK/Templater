@@ -27,13 +27,14 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <ComboBox Margin="0, 10"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" 
-                                  Width="180" Height="30" Padding="0, 5, 0, 0" VerticalAlignment="Center" FontSize="14"
+                                  MinWidth="180" MinHeight="30" Padding="0, 5, 0, 0" VerticalAlignment="Center" FontSize="14"
                                   Name="ComboBoxFiles"
                                   ItemsSource="{Binding Statuses}"
                                   SelectedItem="{Binding SelectedStatus}">
                         </ComboBox>
 
-                        <ListBox Grid.Row="1" Padding="15, 5, 0, 5" Margin="5,5,5,5" HorizontalAlignment="Center" Width="300"
+                        <ListBox Grid.Row="1" Padding="15, 5, 0, 5" Margin="5,5,5,5" HorizontalAlignment="Center" 
+                                 MinWidth="300"
                                  ItemsSource="{Binding Documents}"
                                  SelectedItem="{Binding SelectedDocument}">
                             <ListBox.ItemTemplate>
@@ -67,25 +68,25 @@
                             <Setter Property="Height" Value="32"/>
                         </Style>
                     </StackPanel.Resources>
-                    <Button>
+                    <Button Command="{Binding GetReadyToPrint}">
                         <StackPanel Orientation="Horizontal"  ToolTip="Готово к печати файла">
                             <fa:ImageAwesome Icon="Solid_Print" Height="18" Margin="0,0,5,0" Foreground="DarkBlue"/>
                             <TextBlock Text="На печать" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <Button>
+                    <Button Command="{Binding GetPrinted}">
                         <StackPanel Orientation="Horizontal"  ToolTip="Файл распечатан">
                             <fa:ImageAwesome Icon="Solid_ClipboardCheck" Height="18" Margin="0,0,5,0" Foreground="DarkGreen"/>
                             <TextBlock Text="Распечатано" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <Button>
+                    <Button Command="{Binding GetDeferred}">
                         <StackPanel Orientation="Horizontal"  ToolTip="Отложить печать файла">
                             <fa:ImageAwesome Icon="Regular_Clock" Height="18" Margin="0,0,5,0" Foreground="DarkOrange"/>
                             <TextBlock Text="Отложить" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>
-                    <Button>
+                    <Button Command="{Binding GetClosed}">
                         <StackPanel Orientation="Horizontal" ToolTip="Удалить файл">
                             <fa:ImageAwesome Icon="Regular_TrashAlt" Height="18" Margin="0,0,5,0" Foreground="Red"/>
                             <TextBlock Text="Удалить" VerticalAlignment="Center"/>

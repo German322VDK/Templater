@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Mapping;
 using Templater.Infrastructure.Methods;
-using Templater.Infrastructure.Services.InMemory;
 using Templater.ViewModels.Base;
 using Templator.DTO.DTOModels;
 using Templator.DTO.Models;
@@ -32,9 +30,10 @@ namespace Templater.ViewModels
 
         private bool CanLoadServersCommandExecute(object p) => true;
 
-        private void OnLoadServersCommandExecuted(object p)
+        private async void OnLoadServersCommandExecuted(object p)
         {
-            LoadDocuments();
+            await LoadDocuments();
+            
         }
 
         public PrintOperatorViewModel(IStore<Document> documents, IStore<Template> templates)
@@ -45,7 +44,7 @@ namespace Templater.ViewModels
             Documents = new ObservableCollection<Document>(documents.GetAll());
         }
 
-        private void LoadDocuments()
+        private async Task LoadDocuments()
         {
             var item1 = _templates.GetById(4);
 
@@ -58,7 +57,7 @@ namespace Templater.ViewModels
             keyVal1.Add(keys1[2], "Взыскание долга");
             keyVal1.Add(keys1[3], DateTime.Now.ToString("g"));
 
-            var result1 = CreateDoc(item1, keyVal1);
+            var result1 = await CreateDoc(item1, keyVal1);
 
             var item2 = _templates.GetById(6);
 
@@ -70,10 +69,10 @@ namespace Templater.ViewModels
             keyVal2.Add(keys2[1], "0514");
             keyVal2.Add(keys2[2], "756432");
 
-            var result2 = CreateDoc(item2, keyVal2);
+            var result2 = await CreateDoc(item2, keyVal2);
         }
 
-        private bool CreateDoc(Template item, Dictionary<string, string> keyVal)
+        private async Task<bool> CreateDoc(Template item, Dictionary<string, string> keyVal)
         {
             var tempFN = item.FileName.Split(".")[0];
 
@@ -90,7 +89,11 @@ namespace Templater.ViewModels
             _documents.Add(doc);
             Documents.Add(doc);
 
-            return WordMethods.CreateDoc($"Templates/{item.FileName}", $"Docs/{doc.FileName}", keyVal);
+            var result = await Task.Run(() => 
+                    WordMethods.CreateDoc($"Templates/{item.FileName}", $"Docs/{doc.FileName}", keyVal))
+                .ConfigureAwait(false);
+
+            return result;
         }
     }
 }
