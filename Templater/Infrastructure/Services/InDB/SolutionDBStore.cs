@@ -82,7 +82,10 @@ namespace Templater.Infrastructure.Services.InDB
             return true;
         }
 
-       
+        public bool Update(int id, Status status)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

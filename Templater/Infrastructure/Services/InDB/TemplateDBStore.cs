@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Templater.Infrastructure.Interfaces;
 using Templator.DTO.DTOModels;
+using Templator.DTO.Models;
 using Teplater.SQLite.Context;
 
 namespace Templater.Infrastructure.Services.InDB
@@ -78,6 +79,11 @@ namespace Templater.Infrastructure.Services.InDB
             }
 
             return true;
+        }
+
+        public bool Update(int id, Status status)
+        {
+            throw new NotImplementedException();
         }
     }
 }

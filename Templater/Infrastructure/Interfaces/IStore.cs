@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Templator.DTO.DTOModels.Base;
+using Templator.DTO.Models;
 
 namespace Templater.Infrastructure.Interfaces
 {
@@ -14,5 +15,7 @@ namespace Templater.Infrastructure.Interfaces
         bool Update(T item);
 
         bool Delete(int id);
+
+        public bool Update(int id, Status status);
     }
 }
