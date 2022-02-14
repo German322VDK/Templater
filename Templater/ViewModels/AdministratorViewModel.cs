@@ -54,7 +54,7 @@ namespace Templater.ViewModels
         public Document SelectedDocument { get; set; }
 
         private ObservableCollection<Document> documents;
-        public  ObservableCollection<Document> Documents 
+        public  ObservableCollection<Document> Documents
         {
             get
             {
@@ -126,13 +126,18 @@ namespace Templater.ViewModels
         public ICommand GetReadyToPrint => _getReadyToPrint
             ??= new LambdaCommand(OnGetReadyToPrintCommandExecuted, CanGetReadyToPrintCommandExecute);
 
-        private bool CanGetReadyToPrintCommandExecute(object p) => SelectedDocument is not null;
+        private bool CanGetReadyToPrintCommandExecute(object p) => true;
 
         private void OnGetReadyToPrintCommandExecuted(object p)
         {
-            _docs.Update(SelectedDocument.Id, Status.ReadyToPrint);
+            var listSelectedDocuments = Documents.Where(workers => workers.IsSelected).ToList();
+            foreach (var document in listSelectedDocuments)
+            {
+                _docs.Update(document.Id, Status.ReadyToPrint);
 
-            Documents.SingleOrDefault(el => el.Id == SelectedDocument.Id).Status = Status.ReadyToPrint;
+                Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.ReadyToPrint;
+            }
+            
         }
 
         #endregion
@@ -144,13 +149,18 @@ namespace Templater.ViewModels
         public ICommand GetPrinted => _getPrinted
             ??= new LambdaCommand(OnGetPrintedCommandExecuted, CanGetPrintedCommandExecute);
 
-        private bool CanGetPrintedCommandExecute(object p) => SelectedDocument is not null;
+        private bool CanGetPrintedCommandExecute(object p) => true;
 
         private void OnGetPrintedCommandExecuted(object p)
         {
-            _docs.Update(SelectedDocument.Id, Status.Printed);
+            var listSelectedDocuments = Documents.Where(workers => workers.IsSelected).ToList();
+            foreach (var document in listSelectedDocuments)
+            {
+                _docs.Update(document.Id, Status.Printed);
 
-            Documents.SingleOrDefault(el => el.Id == SelectedDocument.Id).Status = Status.Printed;
+                Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.Printed;
+            }
+            
         }
 
         #endregion
@@ -162,13 +172,17 @@ namespace Templater.ViewModels
         public ICommand GetDeferred => _getDeferred
             ??= new LambdaCommand(OnGetDeferredCommandExecuted, CanGetDeferredCommandExecute);
 
-        private bool CanGetDeferredCommandExecute(object p) => SelectedDocument is not null;
+        private bool CanGetDeferredCommandExecute(object p) => true;
 
         private void OnGetDeferredCommandExecuted(object p)
         {
-            _docs.Update(SelectedDocument.Id, Status.Deferred);
+            var listSelectedDocuments = Documents.Where(workers => workers.IsSelected).ToList();
+            foreach (var document in listSelectedDocuments)
+            {
+                _docs.Update(document.Id, Status.Deferred);
 
-            Documents.SingleOrDefault(el => el.Id == SelectedDocument.Id).Status = Status.Deferred;
+                Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.Deferred;
+            }
         }
 
         #endregion
@@ -180,13 +194,17 @@ namespace Templater.ViewModels
         public ICommand GetClosed => _getClosed
             ??= new LambdaCommand(OnGetClosedCommandExecuted, CanGetClosedCommandExecute);
 
-        private bool CanGetClosedCommandExecute(object p) => SelectedDocument is not null;
+        private bool CanGetClosedCommandExecute(object p) => true;
 
         private void OnGetClosedCommandExecuted(object p)
         {
-            _docs.Update(SelectedDocument.Id, Status.Closed);
+            var listSelectedDocuments = Documents.Where(workers => workers.IsSelected).ToList();
+            foreach (var document in listSelectedDocuments)
+            {
+                _docs.Update(document.Id, Status.Closed);
 
-            Documents.SingleOrDefault(el => el.Id == SelectedDocument.Id).Status = Status.Closed;
+                Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.Closed;
+            }
         }
 
         #endregion
