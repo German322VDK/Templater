@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Blend.Interctivity.WPF.v4.0" Version="1.0.3" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.15.0" />
     <PackageReference Include="FontAwesome5" Version="2.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />

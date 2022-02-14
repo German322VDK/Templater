@@ -19,6 +19,42 @@ namespace Templater.ViewModels
         private IStore<Document> _documents;
         private IStore<Template> _templates;
 
+        public ObservableCollection<Document> SelectedDocuments { get; set; }
+
+        public System.Collections.IList SelectedItems
+        {
+            get
+            {
+                return SelectedDocuments;
+            }
+            set
+            {
+                SelectedDocuments.Clear();
+                foreach (Document doc in value)
+                {
+                    SelectedDocuments.Add(doc);
+                }
+            }
+        }
+
+        private ICommand _getReadyToPrint;
+
+        public ICommand GetReadyToPrint => _getReadyToPrint
+            ??= new LambdaCommand(OnGetReadyToPrintCommandExecuted, CanGetReadyToPrintCommandExecute);
+
+        private bool CanGetReadyToPrintCommandExecute(object p) => true;
+
+        private void OnGetReadyToPrintCommandExecuted(object p)
+        {            
+            foreach (var document in SelectedDocuments)
+            {
+                _documents.Update(document.Id, Status.ReadyToPrint);
+
+                Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.ReadyToPrint;
+            }
+
+
+        }
         public string Title { get; } = "Документы на печать";        
 
         public static ObservableCollection<Document> Documents { get; set; } = new ();
