@@ -53,13 +53,21 @@ namespace Templater.ViewModels
                 Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.ReadyToPrint;
             }
 
-
+            OnPropertyChanged("Docs");
         }
         public string Title { get; } = "Документы на печать";        
 
         public static ObservableCollection<Document> Documents { get; set; } = new ();
 
-        private ICommand _LoadDocumentsСommand;
+        public ObservableCollection<Document> Docs
+        {
+            get
+            {
+               return new ObservableCollection<Document>(Documents.Where(el => el.Status == Status.Unchecked));
+             
+            }
+        }
+    private ICommand _LoadDocumentsСommand;
 
         public ICommand LoadDocumentsСommand => _LoadDocumentsСommand
             ??= new LambdaCommand(OnLoadServersCommandExecuted, CanLoadServersCommandExecute);
@@ -69,7 +77,7 @@ namespace Templater.ViewModels
         private async void OnLoadServersCommandExecuted(object p)
         {
             await LoadDocuments();
-            
+            OnPropertyChanged("Docs");
         }
 
         public PrintOperatorViewModel(IStore<Document> documents, IStore<Template> templates)
@@ -77,7 +85,7 @@ namespace Templater.ViewModels
             _documents = documents;
             _templates = templates;
 
-            Documents = new ObservableCollection<Document>(documents.GetAll());
+            Documents = new ObservableCollection<Document>(documents.GetAll());          
         }
 
         private async Task LoadDocuments()
