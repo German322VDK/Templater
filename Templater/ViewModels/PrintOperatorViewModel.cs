@@ -114,6 +114,18 @@ namespace Templater.ViewModels
             keyVal2.Add(keys2[2], "756432");
 
             var result2 = await CreateDoc(item2, keyVal2);
+
+            var item3 = _templates.GetById(5);
+
+            var keys3 = item1.JSONKeys.FromJSONKeys().ToList();
+
+            var keyVal3 = new Dictionary<string, string>();
+
+            keyVal3.Add(keys3[0], "Петрова Ирина Васильевна");
+            keyVal3.Add(keys3[1], "Иванова Инна Артёмовна");          
+            keyVal3.Add(keys3[2], DateTime.Now.ToString("g"));
+
+            var result3 = await CreateDoc(item3, keyVal3);
         }
 
         private async Task<bool> CreateDoc(Template item, Dictionary<string, string> keyVal)
