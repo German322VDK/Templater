@@ -19,5 +19,6 @@ namespace Templater.ViewModels.Base
             OnPropertyChanged(PropertyName);
             return true;
         }
+
     }
 }
