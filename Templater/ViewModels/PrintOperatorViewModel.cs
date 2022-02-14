@@ -19,7 +19,7 @@ namespace Templater.ViewModels
         private IStore<Document> _documents;
         private IStore<Template> _templates;
 
-        public ObservableCollection<Document> SelectedDocuments { get; set; }
+        public ObservableCollection<Document> SelectedDocuments { get; set; } = new();
 
         public System.Collections.IList SelectedItems
         {
@@ -30,9 +30,9 @@ namespace Templater.ViewModels
             set
             {
                 SelectedDocuments.Clear();
-                foreach (Document doc in value)
+                foreach (var doc in value)
                 {
-                    SelectedDocuments.Add(doc);
+                    SelectedDocuments.Add((Document)doc);
                 }
             }
         }

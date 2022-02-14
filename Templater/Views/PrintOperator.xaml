@@ -40,17 +40,17 @@
                         </StackPanel>
                     </Button>
                     <GroupBox Grid.Row="1" Header="Список документов на печать" FontSize="13" Width="300" Margin="10">
-                        <ListBox Name="MyListView" ItemsSource="{Binding Documents}"                                 
+                        <ListBox Name="MyListView"  ItemsSource="{Binding Documents}"                                 
                                  Padding="15, 5, 0, 5" Margin="5,5,5,5"  SelectionMode="Multiple">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="SelectedDocuments" Value="{Binding Path=SelectedDocuments, ElementName=MyListView}"/>
+                                    <ei:ChangePropertyAction TargetObject="{Binding Mode=OneWay}" PropertyName="SelectedItems" Value="{Binding Path=SelectedItems, ElementName=MyListView}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">                                        
-                                        <TextBlock Text="{Binding FileName}"/>                                        
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding FileName}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
