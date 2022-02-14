@@ -35,7 +35,8 @@ namespace Templater.Infrastructure.Methods
                 {
                     flag = false;
 
-                    strs.Add(new string(str.ToArray()));
+                    string tmp = new string (str.ToArray());
+                    if (!strs.Contains(tmp))strs.Add(tmp);
                 }
             }
 

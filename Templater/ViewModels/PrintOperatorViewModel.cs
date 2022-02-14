@@ -117,7 +117,7 @@ namespace Templater.ViewModels
 
             var item3 = _templates.GetById(5);
 
-            var keys3 = item1.JSONKeys.FromJSONKeys().ToList();
+            var keys3 = item3.JSONKeys.FromJSONKeys().ToList();
 
             var keyVal3 = new Dictionary<string, string>();
 
