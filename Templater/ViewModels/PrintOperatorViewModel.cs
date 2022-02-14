@@ -19,11 +19,55 @@ namespace Templater.ViewModels
         private IStore<Document> _documents;
         private IStore<Template> _templates;
 
+        public ObservableCollection<Document> SelectedDocuments { get; set; } = new();
+
+        public System.Collections.IList SelectedItems
+        {
+            get
+            {
+                return SelectedDocuments;
+            }
+            set
+            {
+                SelectedDocuments.Clear();
+                foreach (var doc in value)
+                {
+                    SelectedDocuments.Add((Document)doc);
+                }
+            }
+        }
+
+        private ICommand _getReadyToPrint;
+
+        public ICommand GetReadyToPrint => _getReadyToPrint
+            ??= new LambdaCommand(OnGetReadyToPrintCommandExecuted, CanGetReadyToPrintCommandExecute);
+
+        private bool CanGetReadyToPrintCommandExecute(object p) => true;
+
+        private void OnGetReadyToPrintCommandExecuted(object p)
+        {            
+            foreach (var document in SelectedDocuments)
+            {
+                _documents.Update(document.Id, Status.ReadyToPrint);
+
+                Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.ReadyToPrint;
+            }
+
+            OnPropertyChanged("Docs");
+        }
         public string Title { get; } = "Документы на печать";        
 
         public static ObservableCollection<Document> Documents { get; set; } = new ();
 
-        private ICommand _LoadDocumentsСommand;
+        public ObservableCollection<Document> Docs
+        {
+            get
+            {
+               return new ObservableCollection<Document>(Documents.Where(el => el.Status == Status.Unchecked));
+             
+            }
+        }
+    private ICommand _LoadDocumentsСommand;
 
         public ICommand LoadDocumentsСommand => _LoadDocumentsСommand
             ??= new LambdaCommand(OnLoadServersCommandExecuted, CanLoadServersCommandExecute);
@@ -33,7 +77,7 @@ namespace Templater.ViewModels
         private async void OnLoadServersCommandExecuted(object p)
         {
             await LoadDocuments();
-            
+            OnPropertyChanged("Docs");
         }
 
         public PrintOperatorViewModel(IStore<Document> documents, IStore<Template> templates)
@@ -41,7 +85,7 @@ namespace Templater.ViewModels
             _documents = documents;
             _templates = templates;
 
-            Documents = new ObservableCollection<Document>(documents.GetAll());
+            Documents = new ObservableCollection<Document>(documents.GetAll());          
         }
 
         private async Task LoadDocuments()
@@ -70,6 +114,18 @@ namespace Templater.ViewModels
             keyVal2.Add(keys2[2], "756432");
 
             var result2 = await CreateDoc(item2, keyVal2);
+
+            var item3 = _templates.GetById(5);
+
+            var keys3 = item1.JSONKeys.FromJSONKeys().ToList();
+
+            var keyVal3 = new Dictionary<string, string>();
+
+            keyVal3.Add(keys3[0], "Петрова Ирина Васильевна");
+            keyVal3.Add(keys3[1], "Иванова Инна Артёмовна");          
+            keyVal3.Add(keys3[2], DateTime.Now.ToString("g"));
+
+            var result3 = await CreateDoc(item3, keyVal3);
         }
 
         private async Task<bool> CreateDoc(Template item, Dictionary<string, string> keyVal)

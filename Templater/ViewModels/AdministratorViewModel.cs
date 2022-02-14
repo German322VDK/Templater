@@ -32,19 +32,9 @@ namespace Templater.ViewModels
             {
                 if (_SelectedStatus== value) return;
                 _SelectedStatus = value;
-                NotifyPropertyChanged("Documents");
+                OnPropertyChanged("Documents");
             }
         }
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        // This method is called by the Set accessor of each property.  
-        // The CallerMemberName attribute that is applied to the optional propertyName  
-        // parameter causes the property name of the caller to be substituted as an argument.  
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            base.OnPropertyChanged(propertyName);
-        }
-
 
         public ObservableCollection<string> Statuses { get; set; } = new ObservableCollection<string>() 
         {
@@ -54,6 +44,14 @@ namespace Templater.ViewModels
         public Document SelectedDocument { get; set; }
 
         private ObservableCollection<Document> documents;
+
+        private ObservableCollection<Document> SelectedDocuments
+        {
+            get
+            {
+                return new ObservableCollection<Document>(Documents.Where(el => el.IsSelected));
+            }
+        }
         public  ObservableCollection<Document> Documents
         {
             get
@@ -130,12 +128,10 @@ namespace Templater.ViewModels
 
         private void OnGetReadyToPrintCommandExecuted(object p)
         {
-            var listSelectedDocuments = Documents.Where(workers => workers.IsSelected).ToList();
-            foreach (var document in listSelectedDocuments)
+            foreach (var document in SelectedDocuments)
             {
-                _docs.Update(document.Id, Status.ReadyToPrint);
-
                 Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.ReadyToPrint;
+                _docs.Update(document.Id, Status.ReadyToPrint);             
             }
             
         }
@@ -153,12 +149,10 @@ namespace Templater.ViewModels
 
         private void OnGetPrintedCommandExecuted(object p)
         {
-            var listSelectedDocuments = Documents.Where(workers => workers.IsSelected).ToList();
-            foreach (var document in listSelectedDocuments)
+            foreach (var document in SelectedDocuments)
             {
-                _docs.Update(document.Id, Status.Printed);
-
                 Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.Printed;
+                _docs.Update(document.Id, Status.Printed);           
             }
             
         }
@@ -176,12 +170,11 @@ namespace Templater.ViewModels
 
         private void OnGetDeferredCommandExecuted(object p)
         {
-            var listSelectedDocuments = Documents.Where(workers => workers.IsSelected).ToList();
-            foreach (var document in listSelectedDocuments)
+            foreach (var document in SelectedDocuments)
             {
-                _docs.Update(document.Id, Status.Deferred);
 
                 Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.Deferred;
+                _docs.Update(document.Id, Status.Deferred);
             }
         }
 
@@ -198,12 +191,10 @@ namespace Templater.ViewModels
 
         private void OnGetClosedCommandExecuted(object p)
         {
-            var listSelectedDocuments = Documents.Where(workers => workers.IsSelected).ToList();
-            foreach (var document in listSelectedDocuments)
+            foreach (var document in SelectedDocuments)
             {
-                _docs.Update(document.Id, Status.Closed);
-
                 Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.Closed;
+                _docs.Update(document.Id, Status.Closed);
             }
         }
 
