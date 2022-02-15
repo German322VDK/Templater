@@ -8,6 +8,7 @@ using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Mapping;
 using Templater.Infrastructure.Methods;
+using Templater.Infrastructure.Services.InMemory;
 using Templater.ViewModels.Base;
 using Templator.DTO.DTOModels;
 using Templator.DTO.Models;
@@ -22,8 +23,8 @@ namespace Templater.ViewModels
         public ObservableCollection<ObservableCollection<Document>> Registrys { get; set; } = new();
 
 
-        private ObservableCollection<Document> _SelectedRegistry;
-        public ObservableCollection<Document> SelectedRegistry {
+        private RegistryElement _SelectedRegistry;
+        public RegistryElement SelectedRegistry {
             get { return _SelectedRegistry; }
             set {
                 if (_SelectedRegistry == value) return;
@@ -79,7 +80,8 @@ namespace Templater.ViewModels
 
         private void OnRegistryAddCommandExecuted(object p)
         {
-            ObservableCollection<Document> Registry = new ObservableCollection<Document>();
+            RegistryElement Registry = new ();
+            Registry.Name += Registrys.Count + 1;
             foreach (var document in SelectedDocuments)
             {
                 Registry.Add(document);
