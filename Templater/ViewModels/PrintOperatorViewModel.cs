@@ -57,7 +57,7 @@ namespace Templater.ViewModels
         public ICommand GetReadyToPrint => _getReadyToPrint
             ??= new LambdaCommand(OnGetReadyToPrintCommandExecuted, CanGetReadyToPrintCommandExecute);
 
-        private bool CanGetReadyToPrintCommandExecute(object p) => true;
+        private bool CanGetReadyToPrintCommandExecute(object p) => SelectedDocuments.Count>0;
 
         private void OnGetReadyToPrintCommandExecuted(object p)
         {            
@@ -70,6 +70,7 @@ namespace Templater.ViewModels
 
             OnPropertyChanged("Docs");
         }
+
 
         private ICommand _registryAdd;
 
@@ -84,10 +85,13 @@ namespace Templater.ViewModels
             Registry.Name += Registrys.Count + 1;
             foreach (var document in SelectedDocuments)
             {
-                Registry.Add(document);
+                document.InRegistry = true;
+                Registry.Add(document);                
             }
+            SelectedDocuments.Clear();               
             Registrys.Add(Registry);
             OnPropertyChanged("Registrys");
+            OnPropertyChanged("Docs");
         }
         public string Title { get; } = "Документы на печать";        
 
@@ -97,7 +101,7 @@ namespace Templater.ViewModels
         {
             get
             {
-               return new ObservableCollection<Document>(Documents.Where(el => el.Status == Status.Unchecked));
+               return new ObservableCollection<Document>(Documents.Where(el => el.Status == Status.Unchecked&&el.InRegistry==false));
              
             }
         }

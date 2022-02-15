@@ -11,6 +11,9 @@ namespace Templator.DTO.DTOModels
         private bool _isSelected;
 
         [NotMapped]
+        public bool InRegistry;
+
+        [NotMapped]
         public bool IsSelected
         {
             get { return _isSelected; }
