@@ -103,10 +103,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <GroupBox Grid.Column="0" Header="Заголовок" Padding="5" FontSize="13" Margin="10">
-                        <TextBox Height="34" VerticalContentAlignment="Center"/>
+                    <GroupBox Grid.Column="0" Header="Название шаблона" Padding="5" FontSize="13" Margin="10">
+                        <TextBlock Height="34" Text="{Binding SelectedTemplate.FileName, 
+                            UpdateSourceTrigger=PropertyChanged}"/>
                     </GroupBox>
-                    <Button Command="{Binding LoadTemplaterWordCommand}" Grid.Column="1" Margin="48,20,0,13" HorizontalAlignment="Left" Width="270" Background="Transparent" BorderThickness="1">
+                    <Button Command="{Binding OpenTemplate}" Grid.Column="1" Margin="48,20,0,13" HorizontalAlignment="Left" Width="270" Background="Transparent" BorderThickness="1">
                         <StackPanel Orientation="Horizontal" ToolTip="Загрузить пользовательский шаблон" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Regular_FolderOpen" Height="22" Margin="0,0,20,0" Foreground="#FF1300FF"/>
                             <TextBlock Text="Загрузить шаблон" FontSize="18"/>
@@ -114,20 +115,24 @@
                     </Button>
                 </Grid>
                 <GroupBox Header="Данные шаблона" FontSize="13" Margin="10">
-                    <Grid>                        
+                    <StackPanel Orientation="Vertical">
                         <DataGrid Grid.Row="0" AutoGenerateColumns="False"
+                                  Height="350"
                             Margin="10, 20, 10, 10"
                             GridLinesVisibility="Vertical"
                             VerticalGridLinesBrush="DarkGray"
                             RowHeight="22"
-                            AlternatingRowBackground="#33CDC8F7" FontSize="15">
+                            AlternatingRowBackground="#33CDC8F7" FontSize="15"
+                                  ItemsSource="{Binding SelectedKeys}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="№" Width="40"/>
-                                <DataGridTextColumn Header="Поле" Width="300"/>
-                                <DataGridTextColumn Header="Описание" Width="*"/>
-                            </DataGrid.Columns>                            
+                                <DataGridTextColumn Header="№" Width="40"  Binding="{Binding Id}"/>
+                                <DataGridTextColumn Header="Поле" Width="*" Binding="{Binding Prop}"/>
+                            </DataGrid.Columns>
                         </DataGrid>
-                    </Grid>
+                        <Button Height="30" Width="250" Margin="10" Command="{Binding AddTemplate}">
+                            <TextBlock Text="Подтвердить шаблон"/>
+                        </Button>
+                    </StackPanel>
                 </GroupBox>
             </DockPanel>
         </GroupBox>

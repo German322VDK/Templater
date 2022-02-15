@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows;
 using System.Windows.Input;
 using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
+using Templater.Infrastructure.Mapping;
 using Templater.Infrastructure.Methods;
 using Templater.ViewModels.Base;
 using Templator.DTO.DTOModels;
@@ -35,6 +37,19 @@ namespace Templater.ViewModels
                 OnPropertyChanged("Documents");
             }
         }
+
+        private Template _selectedTemplate;
+
+        public Template SelectedTemplate
+        {
+            get => _selectedTemplate;
+
+            set => Set(ref _selectedTemplate, value);
+        }
+
+        private string _selectedFile;
+
+        public ObservableCollection<IdProp> SelectedKeys { get; set; } = new();
 
         public ObservableCollection<string> Statuses { get; set; } = new ObservableCollection<string>() 
         {
@@ -200,6 +215,80 @@ namespace Templater.ViewModels
 
         #endregion
 
+        #region OpenTemplate
+
+        private ICommand _openTemplate;
+
+        public ICommand OpenTemplate => _openTemplate
+            ??= new LambdaCommand(OnOpenTemplateCommandExecuted, CanOpenTemplateCommandExecute);
+
+        private bool CanOpenTemplateCommandExecute(object p) => true;
+
+        private void OnOpenTemplateCommandExecuted(object p)
+        {
+            var openFileDialog = new OpenFileDialog();
+
+            //openFileDialog.ShowDialog();
+
+            openFileDialog.Filter = "word files (*.docx)|*.docx|All files (*.*)|*.*";
+
+            bool result = openFileDialog.ShowDialog() ?? false;
+
+            if (!result)
+            {
+                MessageBox.Show("Проблема с выбранным файлом", "Ошибка");
+
+                return;
+            }
+
+            var fileName = _selectedFile = openFileDialog.FileName;
+
+            var keys = WordMethods.SearchFromTo(WordMethods.GetTextFromWord(fileName), '<', '>');
+
+            int i = 0;
+
+            SelectedKeys.Clear();
+
+            foreach (var item in keys)
+            {
+                i++;
+
+                SelectedKeys.Add(new IdProp 
+                { 
+                    Id = i,
+                    Prop = item
+                } );
+            }
+
+            var fnSplit = fileName.Split("\\");
+
+            SelectedTemplate = new Template
+            {
+                FileName = fnSplit[fnSplit.Length - 1],
+                JSONKeys = keys.ToJSONKeys()
+            };
+        }
+
+        #endregion
+
+        #region AddTemplate
+
+        private ICommand _addTemplate;
+
+        public ICommand AddTemplate => _addTemplate
+            ??= new LambdaCommand(OnAddTemplateCommandExecuted, CanAddTemplateCommandExecute);
+
+        private bool CanAddTemplateCommandExecute(object p) => SelectedTemplate is not null && !File.Exists($"Templates/{SelectedTemplate.FileName}");
+
+        private void OnAddTemplateCommandExecuted(object p)
+        {
+            _template.Add(SelectedTemplate);
+
+            File.Copy(_selectedFile, $"Templates/{SelectedTemplate.FileName}");
+        }
+
+        #endregion
+
         #endregion
 
         private Status GetStatus(string statuses)
@@ -236,9 +325,13 @@ namespace Templater.ViewModels
 
         private IStore<Document> _docs;
 
-        public AdministratorViewModel(IStore<Document> docs)
+        private IStore<Template> _template;
+
+        public AdministratorViewModel(IStore<Document> docs, IStore<Template> template)
         {
             _docs = docs;
+
+            _template = template;
 
             documents = PrintOperatorViewModel.Documents;
 
