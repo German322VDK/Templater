@@ -19,7 +19,7 @@ namespace Templater.Infrastructure.Services.InDB
         }
         public Document Add(Document item)
         {
-            if (_db.Documents.Contains(item))
+            if (_db.Documents.FirstOrDefault(el => el.FileName == item.FileName) is not null)
                 return item;
 
             using (_db.Database.BeginTransaction())

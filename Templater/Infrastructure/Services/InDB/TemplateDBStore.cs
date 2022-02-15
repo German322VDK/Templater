@@ -20,7 +20,7 @@ namespace Templater.Infrastructure.Services.InDB
 
         public Template Add(Template item)
         {
-            if (_db.Templates.Contains(item))
+            if (_db.Templates.FirstOrDefault(el => el.FileName == item.FileName) is not null)
                 return item;
 
             using (_db.Database.BeginTransaction())
