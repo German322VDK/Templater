@@ -30,9 +30,10 @@ namespace Templater.ViewModels
                 _SelectedRegistry = value;
                 OnPropertyChanged("SelectedRegistry");
             } }
-       
+
 
         public ObservableCollection<Document> SelectedDocuments { get; set; } = new();
+
 
         public System.Collections.IList SelectedItems
         {
@@ -84,7 +85,6 @@ namespace Templater.ViewModels
                 Registry.Add(document);
             }
             Registrys.Add(Registry);
-
             OnPropertyChanged("Registrys");
         }
         public string Title { get; } = "Документы на печать";        
