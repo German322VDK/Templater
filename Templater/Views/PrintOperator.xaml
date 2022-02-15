@@ -87,7 +87,15 @@
                     </GroupBox>
                 </Grid>
                 <GroupBox Grid.Column="2" Header="Документы в реестре печати" FontSize="13" Width="300" Margin="10">
-                    <ListBox ItemsSource="{Binding SelectedRegistry}" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
+                    <ListBox ItemsSource="{Binding SelectedRegistry}" Padding="15, 5, 0, 5" Margin="5,5,5,5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding FileName}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    </ListBox>
                 </GroupBox>                
             </Grid>
         </GroupBox>
