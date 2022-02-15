@@ -123,7 +123,7 @@ namespace Templater.ViewModels
             _documents = documents;
             _templates = templates;
 
-            Documents = new ObservableCollection<Document>(documents.GetAll());          
+            Documents = new ObservableCollection<Document>(documents.GetAll());
         }
 
         private async Task LoadDocuments()
