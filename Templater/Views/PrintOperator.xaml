@@ -64,7 +64,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0">
+                    <Button Command ="{Binding RegistryAdd}" Grid.Row="0">
                         <StackPanel Orientation="Horizontal" ToolTip="Отправка документа в реестр печати" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Regular_ListAlt" Height="25" Margin="0,0,20,0" Foreground="#FF014BFF"/>
                             <TextBlock Text="Отправка в реестр" FontSize="18"/>
@@ -83,11 +83,11 @@
                         </StackPanel>
                     </Button>
                     <GroupBox Grid.Row="3" Header="Реестры в печати" FontSize="13" Width="300" Margin="10">
-                        <ListBox Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
+                        <ListBox ItemsSource ="{Binding Registrys}" SelectedItem="{Binding SelectedRegistry}"  Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
                     </GroupBox>
                 </Grid>
                 <GroupBox Grid.Column="2" Header="Документы в реестре печати" FontSize="13" Width="300" Margin="10">
-                    <ListBox Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
+                    <ListBox ItemsSource="{Binding SelectedRegistry}" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
                 </GroupBox>                
             </Grid>
         </GroupBox>
