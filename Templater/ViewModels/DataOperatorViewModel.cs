@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Methods;
-using Templater.Infrastructure.Services.InDB;
 using Templater.ViewModels.Base;
 using Templator.DTO.DTOModels;
 
@@ -22,7 +16,7 @@ namespace Templater.ViewModels
 
         public Template SelectedTemplate { get; set; }
 
-        public ObservableCollection<Template> Templates { get; set; }
+        public static ObservableCollection<Template> Templates { get; set; }
 
         private ICommand openFile;
 

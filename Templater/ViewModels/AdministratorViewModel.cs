@@ -284,6 +284,8 @@ namespace Templater.ViewModels
         {
             _template.Add(SelectedTemplate);
 
+            DataOperatorViewModel.Templates.Add(SelectedTemplate);
+
             File.Copy(_selectedFile, $"Templates/{SelectedTemplate.FileName}");
         }
 
