@@ -87,7 +87,7 @@
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Реестр"/>
+                                        <TextBlock Text=  "{Binding Name}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
