@@ -19,6 +19,19 @@ namespace Templater.ViewModels
         private IStore<Document> _documents;
         private IStore<Template> _templates;
 
+        public ObservableCollection<ObservableCollection<Document>> Registrys { get; set; } = new();
+
+
+        private ObservableCollection<Document> _SelectedRegistry;
+        public ObservableCollection<Document> SelectedRegistry {
+            get { return _SelectedRegistry; }
+            set {
+                if (_SelectedRegistry == value) return;
+                _SelectedRegistry = value;
+                OnPropertyChanged("SelectedRegistry");
+            } }
+       
+
         public ObservableCollection<Document> SelectedDocuments { get; set; } = new();
 
         public System.Collections.IList SelectedItems
@@ -54,6 +67,25 @@ namespace Templater.ViewModels
             }
 
             OnPropertyChanged("Docs");
+        }
+
+        private ICommand _registryAdd;
+
+        public ICommand RegistryAdd => _registryAdd
+            ??= new LambdaCommand(OnRegistryAddCommandExecuted, CanRegistryAddCommandExecute);
+
+        private bool CanRegistryAddCommandExecute(object p) => SelectedDocuments.Count > 0;
+
+        private void OnRegistryAddCommandExecuted(object p)
+        {
+            ObservableCollection<Document> Registry = new ObservableCollection<Document>();
+            foreach (var document in SelectedDocuments)
+            {
+                Registry.Add(document);
+            }
+            Registrys.Add(Registry);
+
+            OnPropertyChanged("Registrys");
         }
         public string Title { get; } = "Документы на печать";        
 
