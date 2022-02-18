@@ -7,6 +7,7 @@ using Templater.Data;
 using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Services.InDB;
 using Templater.Infrastructure.Services.InMemory;
+using Templater.Infrastructure.Services.RabbitMQ;
 using Templater.ViewModels;
 using Templator.DTO.DTOModels;
 using Teplater.SQLite.Context;
@@ -51,6 +52,10 @@ namespace Templater
             services.AddTransient<IStore<Document>, DocumentDBStore>();
 
             services.AddTransient<IStore<Template>, TemplateDBStore>();
+
+            services.AddTransient<IRabbitMQService, RabbitMQService>();
+
+            services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
 
             //services.AddTransient<IStore<Solution>, SolutionDBStore>();
 
