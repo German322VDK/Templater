@@ -41,13 +41,10 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Margin="0, 0, 0, 20"  Text="Выберите пользователя" VerticalAlignment="Bottom" FontSize="18" FontWeight="Bold"/>
-                    <ComboBox  HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Width="200" Height="38" Margin="0, 20, 0, 0" Padding="0, 5, 0, 0" VerticalAlignment="Top" FontSize="18">
-                        
+                    <ComboBox  HorizontalContentAlignment="Center" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Width="200" Height="38" Margin="0, 20, 0, 0" Padding="0, 5, 0, 0" VerticalAlignment="Top" FontSize="18">                        
                         <ComboBoxItem x:Name="CbPrintOperator" HorizontalAlignment="Center" Selected="CbPrintOperator_Selected">Оператор печати</ComboBoxItem>
                         <ComboBoxItem x:Name="CbAdministrator" HorizontalAlignment="Center" Selected="CbAdministrator_Selected">Администратор</ComboBoxItem>
-                        <!--<ComboBoxItem x:Name="CbDataOperator"  HorizontalAlignment="Center" 
-                                      Selected="CbDataOperator_Selected" Visibility="Hidden">Оператор данных
-                        </ComboBoxItem>-->
+                        <ComboBoxItem x:Name="CbDataOperator"  HorizontalAlignment="Center" Selected="CbDataOperator_Selected">Оператор данных</ComboBoxItem>
                     </ComboBox>
                 </Grid>
             </TabItem>
@@ -59,15 +56,7 @@
                 </TabItem.Header>
                 <v:PrintOperator/>
             </TabItem>
-            <TabItem x:Name="Administrator" >
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5" Width="220"  TextAlignment="Center" Foreground="#FF1300FF" FontSize="16" FontWeight="Bold">Администратор</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-                <v:Administrator/>
-            </TabItem>
-            <TabItem x:Name="DataOperator" Visibility="Hidden">
+            <TabItem x:Name="DataOperator">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="5" Width="220"  TextAlignment="Center" Foreground="#FF2FB700" FontSize="16" FontWeight="Bold">Оператор данных</TextBlock>
@@ -75,6 +64,14 @@
                 </TabItem.Header>
                 <v:DataOperator/>
             </TabItem>
+            <TabItem x:Name="Administrator" >
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Width="220"  TextAlignment="Center" Foreground="#FF1300FF" FontSize="16" FontWeight="Bold">Администратор</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <v:Administrator/>
+            </TabItem>            
         </TabControl>
     </DockPanel>
 </Window>

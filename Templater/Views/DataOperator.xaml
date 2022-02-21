@@ -10,14 +10,15 @@
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="605"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <GroupBox Header="{Binding Title1}" FontSize="16" Margin="10, 0, 0, 0">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="290"/>
+                    <ColumnDefinition Width="290"/>
+                    <ColumnDefinition Width="290"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -26,11 +27,17 @@
                 </Grid.RowDefinitions>
                 <Button Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="1" Width="270" Height="50">
                     <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
-                        <fa:ImageAwesome Icon="Regular_FileAlt" Height="26" Margin="0,0,20,0" Foreground="#FF0B9600"/>
-                        <TextBlock Text="Новый документ" FontSize="18"/>
+                        <fa:ImageAwesome Icon="Solid_Download" Height="26" Margin="0,0,20,0" Foreground="#FF0B9600"/>
+                        <TextBlock Text="Загрузить данные" FontSize="18"/>
                     </StackPanel>
                 </Button>
                 <Button Grid.Column="1" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                    <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
+                        <fa:ImageAwesome Icon="Solid_FileUpload" Height="29" Margin="0,0,20,0" Foreground="#FF0B9600"/>
+                        <TextBlock Text="Отправка решения" FontSize="18"/>
+                    </StackPanel>
+                </Button>
+                <Button Grid.Column="2" Grid.Row="0" Margin="10,10,10,10" Background="Transparent" BorderThickness="1" Width="270" Height="50">
                     <StackPanel Orientation="Horizontal" ToolTip="Выбор соответствующего шаблона" HorizontalAlignment="Left">
                         <fa:ImageAwesome Icon="Regular_Copy" Height="26" Margin="0,0,20,0" Foreground="#FF0B9600"/>
                         <TextBlock Text="Выбор шаблона" FontSize="18"/>
@@ -40,6 +47,9 @@
                     <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="1">
+                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
+                </Grid>
+                <Grid Grid.Column="2" Grid.Row="1">
                     <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5" Name="ValidTemplates" 
                              ItemsSource="{Binding Templates}"
                              SelectedItem="{Binding SelectedTemplate}">
@@ -57,7 +67,7 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
-                <GroupBox Grid.ColumnSpan="2" Grid.Row="2" Header="Данные для документа" Padding="5" FontSize="13" Margin="5, 10, 5, 10">
+                <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="Данные для документа" Padding="5" FontSize="13" Margin="5, 10, 5, 10">
                     <TextBox Height="200" VerticalContentAlignment="Center" AcceptsReturn="True" AcceptsTab="True"/>
                 </GroupBox>
             </Grid>
@@ -65,21 +75,21 @@
         <GroupBox Grid.Column="1" Header="{Binding Title2}" FontSize="16" Margin="10, 0, 0, 0">
             <DockPanel>
                 <Grid DockPanel.Dock="Top">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <GroupBox Grid.Column="0" Header="Заголовок" Padding="5" FontSize="13" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Header="Заголовок" Padding="5" FontSize="13" Margin="10">
                         <TextBox Height="26" VerticalContentAlignment="Center"/>
                     </GroupBox>
-                    <Button Grid.Column="1" Margin="0,10,10,0" HorizontalAlignment="Right" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                    <Button Grid.Row="1" Margin="0,10" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50">
                         <StackPanel Orientation="Horizontal" ToolTip="Отправить на печать" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Solid_Check" Height="25" Margin="0,0,20,0" Foreground="#FF0B9600"/>
                             <TextBlock Text="Готово к печати" FontSize="18"/>
                         </StackPanel>
                     </Button>
                 </Grid>
-                <GroupBox Header="Файл" FontSize="13" Margin="10, 0, 10, 10">
+                <GroupBox Header="Файл" FontSize="13" Margin="10, 10, 10, 10">
                     <TextBox Margin="5"/>
                 </GroupBox>
             </DockPanel>
