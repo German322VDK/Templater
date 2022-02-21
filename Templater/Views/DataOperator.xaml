@@ -27,13 +27,13 @@
                 </Grid.RowDefinitions>
                 <Button Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="1" Width="270" Height="50">
                     <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
-                        <fa:ImageAwesome Icon="Solid_Download" Height="26" Margin="0,0,20,0" Foreground="#FF0B9600"/>
+                        <fa:ImageAwesome Icon="Solid_Download" Height="26" Margin="0,0,20,0" Foreground="#FF014BFF"/>
                         <TextBlock Text="Загрузить данные" FontSize="18"/>
                     </StackPanel>
                 </Button>
                 <Button Grid.Column="1" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="1" Width="270" Height="50">
                     <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
-                        <fa:ImageAwesome Icon="Solid_FileUpload" Height="29" Margin="0,0,20,0" Foreground="#FF0B9600"/>
+                        <fa:ImageAwesome Icon="Solid_FileUpload" Height="29" Margin="0,0,20,0" Foreground="#FF014BFF"/>
                         <TextBlock Text="Отправка решения" FontSize="18"/>
                     </StackPanel>
                 </Button>
