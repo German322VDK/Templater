@@ -8,6 +8,8 @@ using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Services.InDB;
 using Templater.Infrastructure.Services.InMemory;
 using Templater.Infrastructure.Services.RabbitMQ;
+using Templater.IntegrationEvents.Events;
+using Templater.IntegrationEvents.Handlers;
 using Templater.ViewModels;
 using Templator.DTO.DTOModels;
 using Teplater.SQLite.Context;
@@ -57,6 +59,8 @@ namespace Templater
 
             services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
 
+            services.AddTransient<GetDataIntegrationEventHandler>();
+
             //services.AddTransient<IStore<Solution>, SolutionDBStore>();
 
             //services.AddTransient<IMailService, DebugMailService>(); //создаём объект IMailService(DebugMailService) каждый раз новые
@@ -66,6 +70,10 @@ namespace Templater
         protected override void OnStartup(StartupEventArgs e)
         {
             Services.GetRequiredService<TemplaterDbInitializer>().Initialize();
+
+            var eventBus = Services.GetRequiredService<IRabbitMQService>(); 
+            eventBus.Subscribe<GetDataIntegrationEvent, GetDataIntegrationEventHandler>();
+
             base.OnStartup(e);
 
         }
