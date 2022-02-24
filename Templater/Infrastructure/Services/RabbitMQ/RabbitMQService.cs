@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Templater.Infrastructure.Interfaces;
 using Templator.DTO.Models;
 using RabbitMQ.Client.Events;
+using Newtonsoft.Json.Linq;
 
 namespace Templater.Infrastructure.Services.RabbitMQ
 {
@@ -47,8 +48,8 @@ namespace Templater.Infrastructure.Services.RabbitMQ
             }
         }
 
-        /*
-        public void Subscribe<T, TH>()
+        
+      /*  public void Subscribe<T, TH>()
             where T : IntegrationEvent
             where TH : IIntegrationEventHandler<T>
         {
@@ -172,7 +173,6 @@ namespace Templater.Infrastructure.Services.RabbitMQ
                 throw new NotSupportedException();
             }
         }
-
-        */
+      */
     }
 }

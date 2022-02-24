@@ -72,7 +72,7 @@ namespace Templater
             Services.GetRequiredService<TemplaterDbInitializer>().Initialize();
 
             var eventBus = Services.GetRequiredService<IRabbitMQService>(); 
-            eventBus.Subscribe<GetDataIntegrationEvent, GetDataIntegrationEventHandler>();
+           // eventBus.Subscribe<GetDataIntegrationEvent, GetDataIntegrationEventHandler>();
 
             base.OnStartup(e);
 
