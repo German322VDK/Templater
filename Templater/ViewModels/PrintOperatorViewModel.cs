@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EventBus.Base.Standard;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,6 +10,8 @@ using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Mapping;
 using Templater.Infrastructure.Methods;
 using Templater.Infrastructure.Services.InMemory;
+using Templater.IntegrationEvents.Events;
+using Templater.IntegrationEvents.Handlers;
 using Templater.ViewModels.Base;
 using Templator.DTO.DTOModels;
 using Templator.DTO.Models;
@@ -118,10 +121,14 @@ namespace Templater.ViewModels
             OnPropertyChanged("Docs");
         }
 
-        public PrintOperatorViewModel(IStore<Document> documents, IStore<Template> templates)
+        private readonly IEventBus _eventBus;
+
+
+        public PrintOperatorViewModel(IStore<Document> documents, IStore<Template> templates, IEventBus eventBus)
         {
             _documents = documents;
             _templates = templates;
+            _eventBus = eventBus;
 
             Documents = new ObservableCollection<Document>(documents.GetAll());          
         }
@@ -164,6 +171,7 @@ namespace Templater.ViewModels
             keyVal3.Add(keys3[2], DateTime.Now.ToString("g"));
 
             var result3 = await CreateDoc(item3, keyVal3);
+            //foreach(var item in ItemCreatedIntegrationEvents.Events) { } - нужно обработать новое сообщение
         }
 
         private async Task<bool> CreateDoc(Template item, Dictionary<string, string> keyVal)
