@@ -1,7 +1,7 @@
-﻿using System;
+﻿using EventBus.Base.Standard;
+using System;
 using System.Threading.Tasks;
-using Templater.Infrastructure.Interfaces;
-using Templator.DTO.Models;
+
 
 namespace Templater.IntegrationEvents.Handlers
 {
@@ -11,5 +11,7 @@ namespace Templater.IntegrationEvents.Handlers
         {
             throw new NotImplementedException();
         }
+
+        public GetDataIntegrationEventHandler() { }
     }
 }

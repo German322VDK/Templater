@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Autofac.Extensions.DependencyInjection;
+using EventBus.Base.Standard.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -29,6 +31,7 @@ namespace Templater
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
            Host.CreateDefaultBuilder(args)
+              .UseServiceProviderFactory(new AutofacServiceProviderFactory())
               .ConfigureAppConfiguration(opt => opt.AddJsonFile("appsettings.json", false, true))
               .ConfigureServices(ConfigureServices)
            ;
@@ -59,7 +62,7 @@ namespace Templater
 
             services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
 
-            services.AddTransient<GetDataIntegrationEventHandler>();
+            services.AddEventBusHandling(EventBusExtension.GetHandlers());
 
             //services.AddTransient<IStore<Solution>, SolutionDBStore>();
 

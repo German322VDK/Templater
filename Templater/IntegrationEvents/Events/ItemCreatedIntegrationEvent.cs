@@ -1,18 +1,23 @@
-﻿using Newtonsoft.Json;
+﻿using EventBus.Base.Standard;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Templator.DTO.Models
+namespace Templater.IntegrationEvents.Events
 {
-    public class IntegrationEvent 
+    public class ItemCreatedIntegrationEvent : IntegrationEvent
     {
-        public IntegrationEvent()
+        public ItemCreatedIntegrationEvent()
         {
             Id = Guid.NewGuid();
             CreationDate = DateTime.UtcNow;
         }
 
         [JsonConstructor]
-        public IntegrationEvent(Guid id, DateTime createDate)
+        public ItemCreatedIntegrationEvent(Guid id, DateTime createDate)
         {
             Id = id;
             CreationDate = createDate;
