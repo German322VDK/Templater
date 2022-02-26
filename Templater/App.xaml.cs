@@ -1,4 +1,4 @@
-﻿using Autofac.Extensions.DependencyInjection;
+﻿
 using EventBus.Base.Standard.Configuration;
 using EventBus.RabbitMQ.Standard.Configuration;
 using EventBus.RabbitMQ.Standard.Options;
@@ -11,8 +11,6 @@ using Templater.Data;
 using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Services.InDB;
 using Templater.Infrastructure.Services.InMemory;
-using Templater.Infrastructure.Services.RabbitMQ;
-using Templater.IntegrationEvents.Events;
 using Templater.IntegrationEvents.Handlers;
 using Templater.ViewModels;
 using Templator.DTO.DTOModels;
@@ -33,7 +31,7 @@ namespace Templater
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
            Host.CreateDefaultBuilder(args)
-              .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+              //.UseServiceProviderFactory(new AutofacServiceProviderFactory())
               .ConfigureAppConfiguration(opt => opt.AddJsonFile("appsettings.json", false, true))
               .ConfigureServices(ConfigureServices)
            ;
@@ -64,11 +62,7 @@ namespace Templater
 
             //services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
 
-            var rabbitMqOptions = host.Configuration.GetSection("RabbitMq").Get<RabbitMqOptions>();
-
-            services.AddRabbitMqConnection(rabbitMqOptions);
-            services.AddRabbitMqRegistration(rabbitMqOptions);
-            services.AddEventBusHandling(EventBusExtension.GetHandlers());
+            
 
             //services.AddTransient<IStore<Solution>, SolutionDBStore>();
 
@@ -76,11 +70,20 @@ namespace Templater
 
         }
 
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            /*var rabbitMqOptions = host.Configuration.GetSection("RabbitMq").Get<RabbitMqOptions>();
+
+            services.AddRabbitMqConnection(rabbitMqOptions);
+            services.AddRabbitMqRegistration(rabbitMqOptions);
+            services.AddEventBusHandling(EventBusExtension.GetHandlers());*/
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             Services.GetRequiredService<TemplaterDbInitializer>().Initialize();
 
-            var eventBus = Services.GetRequiredService<IRabbitMQService>(); 
+           //var eventBus = Services.GetRequiredService<IRabbitMQService>(); 
            // eventBus.Subscribe<GetDataIntegrationEvent, GetDataIntegrationEventHandler>();
 
             base.OnStartup(e);

@@ -121,14 +121,14 @@ namespace Templater.ViewModels
             OnPropertyChanged("Docs");
         }
 
-        private readonly IEventBus _eventBus;
+       // private readonly IEventBus _eventBus;
 
 
-        public PrintOperatorViewModel(IStore<Document> documents, IStore<Template> templates, IEventBus eventBus)
+        public PrintOperatorViewModel(IStore<Document> documents, IStore<Template> templates/*, IEventBus eventBus*/)
         {
             _documents = documents;
             _templates = templates;
-            _eventBus = eventBus;
+            //_eventBus = eventBus;
 
             Documents = new ObservableCollection<Document>(documents.GetAll());          
         }
