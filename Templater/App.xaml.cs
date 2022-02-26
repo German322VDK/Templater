@@ -1,5 +1,7 @@
 ﻿using Autofac.Extensions.DependencyInjection;
 using EventBus.Base.Standard.Configuration;
+using EventBus.RabbitMQ.Standard.Configuration;
+using EventBus.RabbitMQ.Standard.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -58,10 +60,14 @@ namespace Templater
 
             services.AddTransient<IStore<Template>, TemplateDBStore>();
 
-            services.AddTransient<IRabbitMQService, RabbitMQService>();
+            //services.AddTransient<IRabbitMQService, RabbitMQService>();
 
-            services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
+            //services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
 
+            var rabbitMqOptions = host.Configuration.GetSection("RabbitMq").Get<RabbitMqOptions>();
+
+            services.AddRabbitMqConnection(rabbitMqOptions);
+            services.AddRabbitMqRegistration(rabbitMqOptions);
             services.AddEventBusHandling(EventBusExtension.GetHandlers());
 
             //services.AddTransient<IStore<Solution>, SolutionDBStore>();
