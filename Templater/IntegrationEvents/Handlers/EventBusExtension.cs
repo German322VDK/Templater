@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using EventBus.Base.Standard;
+using Templater.IntegrationEvents.Events;
 
 namespace Templater.IntegrationEvents.Handlers
 {
@@ -26,7 +27,7 @@ namespace Templater.IntegrationEvents.Handlers
         {
             var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
 
-            eventBus.Subscribe<IntegrationEvent, GetDataIntegrationEventHandler>();
+            eventBus.Subscribe<ItemCreatedIntegrationEvent, GetDataIntegrationEventHandler>();
 
             return app;
         }
