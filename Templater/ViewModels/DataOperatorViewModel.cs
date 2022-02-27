@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Text;
 using System.Windows.Input;
 using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
@@ -18,6 +19,10 @@ namespace Templater.ViewModels
 
         public static ObservableCollection<Template> Templates { get; set; }
 
+        public string Sub { get; set; }
+
+        public static ObservableCollection<string> Subs { get; set; } = new ObservableCollection<string>() { "1", "2"};
+
         private ICommand openFile;
 
         public ICommand OpenFile => openFile
@@ -30,13 +35,18 @@ namespace Templater.ViewModels
         }
 
         private IStore<Template> _templateDB;
-        public DataOperatorViewModel(IStore<Template> templateDB)
+
+        private IRabbitMQService _service;
+
+        public DataOperatorViewModel(IStore<Template> templateDB, IRabbitMQService service)
         {
             _templateDB = templateDB;
 
+            _service = service;
+
             Templates = new ObservableCollection<Template>(_templateDB.GetAll());
 
-
+            //_service.Subscribe();
         }
 
         public DataOperatorViewModel()
