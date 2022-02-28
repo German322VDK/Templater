@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Methods;
+using Templater.Infrastructure.Services.RabbitMQ;
 using Templater.ViewModels.Base;
 using Templator.DTO.DTOModels;
 
@@ -21,7 +22,8 @@ namespace Templater.ViewModels
 
         public string Sub { get; set; }
 
-        public static ObservableCollection<string> Subs { get; set; } = new ObservableCollection<string>() { "1", "2"};
+        
+        public static ObservableCollection<string> Subs { get; set; } = new();
 
         private ICommand openFile;
 

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -106,7 +107,7 @@ namespace Templater
                 Data = testData
             });
 
-            service.Subscribe();
+            service.Subscribe( );
 
             // eventBus.Subscribe<GetDataIntegrationEvent, GetDataIntegrationEventHandler>();
 

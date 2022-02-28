@@ -7,6 +7,8 @@ using Templater.Infrastructure.Interfaces;
 using Templator.DTO.Models;
 using RabbitMQ.Client.Events;
 using Templater.ViewModels;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Templater.Infrastructure.Services.RabbitMQ
 {
@@ -14,8 +16,9 @@ namespace Templater.Infrastructure.Services.RabbitMQ
     {
         private readonly IConnectionFactory _connectionFactory;
         private readonly IConfiguration _configuration;
+       
 
-        public RabbitMQService(IConnectionFactory connectionFactory,  IConfiguration configuration)
+        public RabbitMQService(IConnectionFactory connectionFactory, IConfiguration configuration)
         {
             _connectionFactory = connectionFactory;
             _configuration = configuration;
@@ -24,10 +27,10 @@ namespace Templater.Infrastructure.Services.RabbitMQ
         {
             var queueName = _configuration["RabbitMQ:Queue"];
 
-            using (var connection = _connectionFactory.CreateConnection()) 
+            var connection = _connectionFactory.CreateConnection();
 
-            using (var channel = connection.CreateModel())
-            {
+            var channel = connection.CreateModel();
+           
                 channel.QueueDeclarePassive(queueName);
 
                 var message = JsonConvert.SerializeObject(@event);
@@ -37,34 +40,43 @@ namespace Templater.Infrastructure.Services.RabbitMQ
                     routingKey: queueName,
                     basicProperties: null,
                     body: body);
-            }
+            
         }
 
         public void Subscribe(/*EventHandler<BasicDeliverEventArgs> @event*/)
         {
             var queueName = _configuration["RabbitMQ:Queue"];
 
-            using (var connection = _connectionFactory.CreateConnection())
+            var connection = _connectionFactory.CreateConnection();
 
-            using (var channel = connection.CreateModel())
-            {
-                channel.QueueDeclarePassive(queueName);
+            var channel = connection.CreateModel();
+           
+            channel.QueueDeclarePassive(queueName);
 
-                var consumer = new EventingBasicConsumer(channel);
+            var consumer = new EventingBasicConsumer(channel);
+          
 
                 consumer.Received += (model, ea) =>
-                {
-                    var body = ea.Body.ToArray();
-                    var message = Encoding.UTF8.GetString(body);
+                    {
+                        var body = ea.Body.ToArray();
+                        var message = Encoding.UTF8.GetString(body);
+                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                        {
+                            DataOperatorViewModel.Subs.Add(message);
+                        });
+                        
+                        
+                        
+                    };
+            
 
-                    DataOperatorViewModel.Subs.Add(message);
-                };
+           
 
-                var res = channel.BasicConsume(queue: queueName,
-                                     autoAck: true,
-                                     consumer: consumer);
-            }
+
+            channel.BasicConsume(queue: queueName,
+                                                     autoAck: true,
+                                                     consumer: consumer);
+
         }
-
     }
 }
