@@ -96,23 +96,28 @@ namespace Templater
 
             var service = Services.GetRequiredService<IRabbitMQService>();
 
-            //var testData = new Dictionary<string, string>();
+            var testData = new Dictionary<string, string>();
 
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    testData.Clear();
-            //    testData.Add($"{i}", $"test-{i}");
+            for (int i = 0; i < 2; i++)
+            {
+                testData.Clear();
 
-            //    var data = new DataIntegrationEvent
-            //    {
-            //        FileName = $"File{i}",
-            //        Data = testData
-            //    };
+                for (int j = 0; j < 5; j++)
+                {
+                    testData.Add($"{i}-{j}", $"test-{j}");
+                }
+               
+
+                var data = new DataIntegrationEvent
+                {
+                    FileName = $"File{i}",
+                    Data = testData
+                };
 
 
-            //    service.Publish(data);
+                service.Publish(data);
 
-            //}
+            }
 
 
             //service.Subscribe( );
