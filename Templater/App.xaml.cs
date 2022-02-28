@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using Templater.Data;
 using Templater.Infrastructure.Interfaces;
@@ -12,6 +15,7 @@ using Templater.IntegrationEvents.Events;
 using Templater.IntegrationEvents.Handlers;
 using Templater.ViewModels;
 using Templator.DTO.DTOModels;
+using Templator.DTO.Models;
 using Teplater.SQLite.Context;
 
 namespace Templater
@@ -55,11 +59,28 @@ namespace Templater
 
             services.AddTransient<IStore<Template>, TemplateDBStore>();
 
-            services.AddTransient<IRabbitMQService, RabbitMQService>();
+            services.AddSingleton<IConnectionFactory, ConnectionFactory>( sp => 
+            {
 
-            services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
+                var factory = new ConnectionFactory()
+                {
+                    HostName = host.Configuration.GetSection("RabbitMQ")["HostName"],
+                    UserName = host.Configuration.GetSection("RabbitMQ")["Login"],
+                    Password = host.Configuration.GetSection("RabbitMQ")["Password"],
+                    Port = 5671,
+                    Uri = new Uri(host.Configuration.GetSection("RabbitMQ")["Uri"])
+                };
 
-            services.AddTransient<GetDataIntegrationEventHandler>();
+                factory.Ssl.Enabled = true;
+
+                return factory;
+            });
+
+            services.AddSingleton<IRabbitMQService, RabbitMQService>();
+
+            //services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
+
+            //services.AddTransient<GetDataIntegrationEventHandler>();
 
             //services.AddTransient<IStore<Solution>, SolutionDBStore>();
 
@@ -71,10 +92,33 @@ namespace Templater
         {
             Services.GetRequiredService<TemplaterDbInitializer>().Initialize();
 
-            var eventBus = Services.GetRequiredService<IRabbitMQService>(); 
-           // eventBus.Subscribe<GetDataIntegrationEvent, GetDataIntegrationEventHandler>();
+           
+
+            var service = Services.GetRequiredService<IRabbitMQService>();
+
+            //var testData = new Dictionary<string, string>();
+
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    testData.Clear();
+            //    testData.Add($"{i}", $"test-{i}");
+
+            //    var data = new DataIntegrationEvent
+            //    {
+            //        FileName = $"File{i}",
+            //        Data = testData
+            //    };
+
+
+            //    service.Publish(data);
+
+            //}
+
+
+            //service.Subscribe( );
 
             base.OnStartup(e);
+
 
         }
     }

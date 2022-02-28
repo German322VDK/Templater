@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
+using Templator.DTO.Models;
 
 namespace Templater.Infrastructure.Mapping
 {
@@ -16,5 +17,8 @@ namespace Templater.Infrastructure.Mapping
 
         public static Dictionary<string, string> FromJSONKeyValue(this string obj) =>
             JsonConvert.DeserializeObject<Dictionary<string, string>>(obj);
+
+        public static DataIntegrationEvent FromData(this string obj) =>
+            JsonConvert.DeserializeObject<DataIntegrationEvent>(obj);
     }
 }

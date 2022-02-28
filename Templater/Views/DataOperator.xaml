@@ -25,13 +25,17 @@
                     <RowDefinition/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Button Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                <Button Grid.Column="1" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" Background="Transparent" 
+                        BorderThickness="1" Width="270" Height="50"
+                        Command="{Binding GetData}">
                     <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
                         <fa:ImageAwesome Icon="Solid_Download" Height="26" Margin="0,0,20,0" Foreground="#FF014BFF"/>
                         <TextBlock Text="Загрузить данные" FontSize="18"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Column="1" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                <Button Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" 
+                        Background="Transparent" BorderThickness="1" Width="270" Height="50"
+                        >
                     <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
                         <fa:ImageAwesome Icon="Solid_FileUpload" Height="29" Margin="0,0,20,0" Foreground="#FF014BFF"/>
                         <TextBlock Text="Отправка решения" FontSize="18"/>
@@ -47,7 +51,16 @@
                     <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
                 </Grid>
                 <Grid Grid.Column="1" Grid.Row="1">
-                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
+                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"
+                             ItemsSource="{Binding Subs}"
+                             SelectedItem="{Binding SelectedSub}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FileName}"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    
                 </Grid>
                 <Grid Grid.Column="2" Grid.Row="1">
                     <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5" Name="ValidTemplates" 
@@ -68,7 +81,18 @@
                     </ListBox>
                 </Grid>
                 <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="Данные для документа" Padding="5" FontSize="13" Margin="5, 10, 5, 10">
-                    <TextBox Height="200" VerticalContentAlignment="Center" AcceptsReturn="True" AcceptsTab="True"/>
+                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5" Height="150"
+                             ItemsSource="{Binding SubData}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Key}"/>
+                                    <TextBlock Text="| - |"/>
+                                    <TextBlock Text="{Binding Value}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </GroupBox>
             </Grid>
         </GroupBox>

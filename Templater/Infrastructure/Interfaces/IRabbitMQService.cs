@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RabbitMQ.Client.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,8 @@ namespace Templater.Infrastructure.Interfaces
         //    where TH : IIntegrationEventHandler<T>;
 
         public void Publish(IntegrationEvent @event);
+
+        public void Subscribe(EventHandler<BasicDeliverEventArgs> @event);
 
     }
 }
