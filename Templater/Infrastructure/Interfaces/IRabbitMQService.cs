@@ -16,7 +16,7 @@ namespace Templater.Infrastructure.Interfaces
 
         public void Publish(IntegrationEvent @event);
 
-        public void Subscribe(/*EventHandler<BasicDeliverEventArgs> @event*/);
+        public void Subscribe(EventHandler<BasicDeliverEventArgs> @event);
 
     }
 }

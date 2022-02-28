@@ -92,32 +92,30 @@ namespace Templater
         {
             Services.GetRequiredService<TemplaterDbInitializer>().Initialize();
 
-            var testData = new Dictionary<string, string>();
+           
 
             var service = Services.GetRequiredService<IRabbitMQService>();
 
-            for (int i = 0; i < 2; i++)
-            {
-                testData.Clear();
-                testData.Add($"{i}", $"test-{i}");
-                
+            //var testData = new Dictionary<string, string>();
+
+            //for (int i = 0; i < 2; i++)
+            //{
+            //    testData.Clear();
+            //    testData.Add($"{i}", $"test-{i}");
+
+            //    var data = new DataIntegrationEvent
+            //    {
+            //        FileName = $"File{i}",
+            //        Data = testData
+            //    };
 
 
+            //    service.Publish(data);
+
+            //}
 
 
-                service.Publish(new TestIntegrationEvent
-                {
-                    Data = testData
-                });
-
-            }
-
-
-
-
-            service.Subscribe( );
-
-            // eventBus.Subscribe<GetDataIntegrationEvent, GetDataIntegrationEventHandler>();
+            //service.Subscribe( );
 
             base.OnStartup(e);
 

@@ -9,6 +9,8 @@ using RabbitMQ.Client.Events;
 using Templater.ViewModels;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Templater.Infrastructure.Mapping;
+using System.Diagnostics;
 
 namespace Templater.Infrastructure.Services.RabbitMQ
 {
@@ -43,7 +45,7 @@ namespace Templater.Infrastructure.Services.RabbitMQ
             
         }
 
-        public void Subscribe(/*EventHandler<BasicDeliverEventArgs> @event*/)
+        public void Subscribe(EventHandler<BasicDeliverEventArgs> @event)
         {
             var queueName = _configuration["RabbitMQ:Queue"];
 
@@ -54,28 +56,13 @@ namespace Templater.Infrastructure.Services.RabbitMQ
             channel.QueueDeclarePassive(queueName);
 
             var consumer = new EventingBasicConsumer(channel);
-          
 
-                consumer.Received += (model, ea) =>
-                    {
-                        var body = ea.Body.ToArray();
-                        var message = Encoding.UTF8.GetString(body);
-                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
-                        {
-                            DataOperatorViewModel.Subs.Add(message);
-                        });
-                        
-                        
-                        
-                    };
-            
-
-           
-
+            //исправить через @event
+            consumer.Received += @event;
 
             channel.BasicConsume(queue: queueName,
-                                                     autoAck: true,
-                                                     consumer: consumer);
+                                 autoAck: true,
+                                 consumer: consumer);
 
         }
     }
