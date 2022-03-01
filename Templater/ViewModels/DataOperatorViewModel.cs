@@ -58,44 +58,6 @@ namespace Templater.ViewModels
         }
 
 
-        private IStore<Template> _templateDB;
-
-        private IRabbitMQService _service;
-
-        public DataOperatorViewModel(IStore<Template> templateDB, IRabbitMQService service)
-        {
-            _templateDB = templateDB;
-
-            _service = service;
-
-            Templates = new ObservableCollection<Template>(_templateDB.GetAll());
-
-            _service.Subscribe((model, ea) =>
-            {
-                try
-                {
-                    var body = ea.Body.ToArray();
-                    var message = Encoding.UTF8.GetString(body);
-
-                    var data = message.FromData();
-
-                    App.Current.Dispatcher.Invoke(delegate // <--- HERE
-                    {
-                        DataOperatorViewModel.Subs.Add(data);
-                    });
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                }
-
-            });
-        }
-
-        public DataOperatorViewModel()
-        {
-        }
-
         private ICommand _LoadDocumentsСommand;
 
         public ICommand CreateDocumentСommand => _LoadDocumentsСommand
@@ -137,12 +99,62 @@ namespace Templater.ViewModels
                 JSONValues = keyVal.ToJSONKeyValue()
             };
 
+            _documnetDB.Add(doc);
+
+            _administratorViewModel.Documents.Add(doc);
 
             var result = await Task.Run(() =>
                     WordMethods.CreateDoc($"Templates/{item.FileName}", $"Docs/{doc.FileName}", keyVal))
                 .ConfigureAwait(false);
 
             return result;
+        }
+
+        private IStore<Document> _documnetDB;
+
+        private IStore<Template> _templateDB;
+
+        private IRabbitMQService _service;
+
+        private AdministratorViewModel _administratorViewModel;
+
+        public DataOperatorViewModel(IStore<Template> templateDB, IStore<Document> documnetDB, IRabbitMQService service,
+            AdministratorViewModel administratorViewModel)
+        {
+            _templateDB = templateDB;
+
+            _service = service;
+
+            _documnetDB = documnetDB;
+
+            _administratorViewModel = administratorViewModel;
+
+            Templates = new ObservableCollection<Template>(_templateDB.GetAll());
+
+            _service.Subscribe((model, ea) =>
+            {
+                try
+                {
+                    var body = ea.Body.ToArray();
+                    var message = Encoding.UTF8.GetString(body);
+
+                    var data = message.FromData();
+
+                    App.Current.Dispatcher.Invoke(delegate // <--- HERE
+                    {
+                        Subs.Add(data);
+                    });
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+
+            });
+        }
+
+        public DataOperatorViewModel()
+        {
         }
 
         //private ICollection<StSt> GetListData(Dictionary<string, string> keyValues)
