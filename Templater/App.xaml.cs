@@ -86,9 +86,9 @@ namespace Templater
 
             var testData = new Dictionary<string, string>();
 
-            testData.Add("Full FIO", "Петрова Ирина Васильевна");
-            testData.Add("PassportSerial", "0514");
-            testData.Add("PassportNumber", "756432");
+            testData.Add("<Full FIO>", "Петрова Ирина Васильевна");
+            testData.Add("<PassportSerial>", "0514");
+            testData.Add("<PassportNumber>", "756432");
 
             var data = new DataIntegrationEvent
             {

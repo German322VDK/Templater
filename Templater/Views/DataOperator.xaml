@@ -14,8 +14,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <GroupBox Header="{Binding Title1}" FontSize="16" Margin="10, 0, 0, 0">
-            <Grid>
-                <Grid.ColumnDefinitions>
+            <Grid MinWidth="500">
+                
+                <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition Width="290"/>
                     <ColumnDefinition Width="290"/>
                     <ColumnDefinition Width="290"/>
@@ -24,16 +25,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                     <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Button Grid.Column="1" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" Background="Transparent" 
-                        BorderThickness="1" Width="270" Height="50"
-                        Command="{Binding GetData}">
-                    <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
-                        <fa:ImageAwesome Icon="Solid_Download" Height="26" Margin="0,0,20,0" Foreground="#FF014BFF"/>
-                        <TextBlock Text="Загрузить данные" FontSize="18"/>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" 
+                </Grid.RowDefinitions>-->
+                <!--<Button Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" HorizontalAlignment="Right" 
                         Background="Transparent" BorderThickness="1" Width="270" Height="50"
                         >
                     <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
@@ -46,23 +39,11 @@
                         <fa:ImageAwesome Icon="Regular_Copy" Height="26" Margin="0,0,20,0" Foreground="#FF0B9600"/>
                         <TextBlock Text="Выбор шаблона" FontSize="18"/>
                     </StackPanel>
-                </Button>
-                <Grid Grid.Column="0" Grid.Row="1">
+                </Button>-->
+                <!--<Grid Grid.Column="0" Grid.Row="1">
                     <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
-                </Grid>
-                <Grid Grid.Column="1" Grid.Row="1">
-                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"
-                             ItemsSource="{Binding Subs}"
-                             SelectedItem="{Binding SelectedSub}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding FileName}"/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    
-                </Grid>
-                <Grid Grid.Column="2" Grid.Row="1">
+                </Grid>-->
+                <!--<Grid Grid.Column="2" Grid.Row="1">
                     <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5" Name="ValidTemplates" 
                              ItemsSource="{Binding Templates}"
                              SelectedItem="{Binding SelectedTemplate}">
@@ -79,41 +60,77 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </Grid>
-                <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="Полученные данные" Padding="5" FontSize="13" Margin="5, 10, 5, 10">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="ID сообщения: "/>
-                            <TextBlock Grid.Row="0" Text="{Binding SelectedSub.Id}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="ID шаблона: "/>
-                            <TextBlock Grid.Row="0" Text="{Binding SelectedSub.TemplateId}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Имя шаблона: "/>
-                            <TextBlock Grid.Row="1" Text="{Binding SelectedSub.FileName}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="Дата создания: "/>
-                            <TextBlock Grid.Row="2" Text="{Binding SelectedSub.CreationDate}"/>
-                        </StackPanel>
-                        <GroupBox Header="Метки:">
-                            <ListBox Grid.Row="3" Padding="15, 5, 0, 5" Margin="5,5,5,5" Height="150"
+                </Grid>-->
+
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="{Binding TitleCheck}" Margin="0, 10">
+                        <fa:ImageAwesome Icon="Solid_CheckSquare" Height="16" Foreground="ForestGreen" 
+                                         Visibility="{Binding isGood}"/>
+                    </TextBlock>
+                    <GroupBox Header="Список полученных сообщений">
+                        <ListBox Padding="15, 5, 0, 5" Margin="5,5,5,5" Height="100"
+                             ItemsSource="{Binding Subs}"
+                             SelectedItem="{Binding SelectedSub}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </GroupBox>
+                    <GroupBox Header="Полученные данные" Padding="5" FontSize="13" Margin="5, 10, 5, 10">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="ID сообщения: "/>
+                                <TextBlock Grid.Row="0" Text="{Binding SelectedSub.Id}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="ID шаблона: "/>
+                                <TextBlock Grid.Row="0" Text="{Binding SelectedSub.TemplateId}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Имя шаблона: "/>
+                                <TextBlock Grid.Row="1" Text="{Binding SelectedSub.FileName}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Дата создания: "/>
+                                <TextBlock Grid.Row="2" Text="{Binding SelectedSub.CreationDate}"/>
+                            </StackPanel>
+                            <GroupBox Header="Метки:">
+                                <ListBox Grid.Row="3" Padding="15, 5, 0, 5" Margin="5,5,5,5" Height="125"
                              ItemsSource="{Binding SelectedSub.Data}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Key}"/>
-                                            <TextBlock Text=" - "/>
-                                            <TextBlock Text="{Binding Value}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </GroupBox>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding Key}"/>
+                                                <TextBlock Text=" - "/>
+                                                <TextBlock Text="{Binding Value}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </GroupBox>
+                        </StackPanel>
+                    </GroupBox>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="10,10,10,10" Background="Transparent" 
+                        BorderThickness="1" Width="270" Height="50"
+                        Command="{Binding CheckСommand}">
+                            <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
+                                <fa:ImageAwesome Icon="Solid_CheckCircle" Height="26" Margin="0,0,20,0" Foreground="#FF014BFF"/>
+                                <TextBlock Text="Проверить метки" FontSize="18"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Grid.Row="1" Margin="0,10" HorizontalAlignment="Center" Background="Transparent" 
+                                BorderThickness="1" Width="270" Height="50" 
+                                Command="{Binding CreateDocumentСommand}">
+                            <StackPanel Orientation="Horizontal" ToolTip="Отправить на печать" HorizontalAlignment="Left">
+                                <fa:ImageAwesome Icon="Solid_Check" Height="25" Margin="0,0,20,0" Foreground="#FF0B9600"/>
+                                <TextBlock Text="Готово к печати" FontSize="18"/>
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-                </GroupBox>
+                </StackPanel>
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="{Binding Title2}" FontSize="16" Margin="10, 0, 0, 0">
@@ -126,12 +143,7 @@
                     <GroupBox Grid.Row="0" Header="Заголовок" Padding="5" FontSize="13" Margin="10">
                         <TextBox Height="26" VerticalContentAlignment="Center"/>
                     </GroupBox>
-                    <Button Grid.Row="1" Margin="0,10" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50" Command="{Binding CreateDocumentСommand}">
-                        <StackPanel Orientation="Horizontal" ToolTip="Отправить на печать" HorizontalAlignment="Left">
-                            <fa:ImageAwesome Icon="Solid_Check" Height="25" Margin="0,0,20,0" Foreground="#FF0B9600"/>
-                            <TextBlock Text="Готово к печати" FontSize="18"/>
-                        </StackPanel>
-                    </Button>
+                    
                 </Grid>
                 <GroupBox Header="Файл" FontSize="13" Margin="10, 10, 10, 10">
                     <TextBox Margin="5"/>

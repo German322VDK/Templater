@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
@@ -21,6 +22,22 @@ namespace Templater.ViewModels
         public string Title1 { get; } = "Проверка данных";
 
         public string Title2 { get; } = "Документ";
+
+        public string _titleCheck = "Не выбран";
+
+        public string TitleCheck 
+        {
+            get => _titleCheck;
+            set => Set(ref _titleCheck, value);
+        }
+
+        private Visibility _isGood = Visibility.Hidden;
+
+        public Visibility isGood
+        {
+            get => _isGood;
+            set => Set(ref _isGood, value);
+        }
 
         public Template SelectedTemplate { get; set; }
 
@@ -60,6 +77,53 @@ namespace Templater.ViewModels
         {
             await DecisionToDoc();
             OnPropertyChanged("Docs");
+        }
+
+        private ICommand _checkСommand;
+
+        public ICommand CheckСommand => _checkСommand
+            ??= new LambdaCommand(OnCheckСommandExecuted, CanCheckСommandExecute);
+
+        private bool CanCheckСommandExecute(object p) => SelectedSub is not null;
+
+        private void OnCheckСommandExecuted(object p)
+        {
+            var result = CheckMarks();
+
+            if (result)
+            {
+                TitleCheck = "Метки совпали";
+                isGood = Visibility.Visible;
+            }
+
+            else
+            {
+                TitleCheck = "Метки не совпали";
+                isGood = Visibility.Hidden;
+            }
+        }
+
+        private bool CheckMarks()
+        {
+            var template = _templateDB.GetById(int.Parse(SelectedSub.TemplateId));
+
+            var templateKeys = template.JSONKeys.FromJSONKeys().ToList();
+            templateKeys.Sort();
+
+            var subKeys = SelectedSub.Data.Select(el => el.Key).ToList();
+            subKeys.Sort();
+
+            if (templateKeys.Count != subKeys.Count)
+                return false;
+
+            for (int i = 0; i < templateKeys.Count; i++)
+            {
+                if (templateKeys[i] != subKeys[i])
+                    return false;
+            }
+
+            return true;
+
         }
 
 
