@@ -97,7 +97,7 @@ namespace Templater.Infrastructure.Methods
                 {
                     var find = app.Selection.Find;
 
-                    find.Text = item.Key;
+                    find.Text = $"<{item.Key}>";
 
                     find.Replacement.Text = item.Value;
 
