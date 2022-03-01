@@ -111,7 +111,7 @@
                     <GroupBox Grid.Row="0" Header="Заголовок" Padding="5" FontSize="13" Margin="10">
                         <TextBox Height="26" VerticalContentAlignment="Center"/>
                     </GroupBox>
-                    <Button Grid.Row="1" Margin="0,10" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50">
+                    <Button Grid.Row="1" Margin="0,10" HorizontalAlignment="Center" Background="Transparent" BorderThickness="1" Width="270" Height="50" Command="{Binding CreateDocumentСommand}">
                         <StackPanel Orientation="Horizontal" ToolTip="Отправить на печать" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Solid_Check" Height="25" Margin="0,0,20,0" Foreground="#FF0B9600"/>
                             <TextBlock Text="Готово к печати" FontSize="18"/>
