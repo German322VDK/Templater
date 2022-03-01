@@ -6,11 +6,6 @@ using System.Text;
 using Templater.Infrastructure.Interfaces;
 using Templator.DTO.Models;
 using RabbitMQ.Client.Events;
-using Templater.ViewModels;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Templater.Infrastructure.Mapping;
-using System.Diagnostics;
 
 namespace Templater.Infrastructure.Services.RabbitMQ
 {

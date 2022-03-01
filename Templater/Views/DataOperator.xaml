@@ -82,21 +82,36 @@
                 </Grid>
                 <GroupBox Grid.ColumnSpan="3" Grid.Row="2" Header="Полученные данные" Padding="5" FontSize="13" Margin="5, 10, 5, 10">
                     <StackPanel>
-                        <TextBlock Grid.Row="0" Text="{Binding SelectedSub.Id}"/>
-                        <TextBlock Grid.Row="1" Text="{Binding SelectedSub.FileName}"/>
-                        <TextBlock Grid.Row="2" Text="{Binding SelectedSub.CreationDate}"/>
-                        <ListBox Grid.Row="3" Padding="15, 5, 0, 5" Margin="5,5,5,5" Height="150"
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="ID сообщения: "/>
+                            <TextBlock Grid.Row="0" Text="{Binding SelectedSub.Id}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="ID шаблона: "/>
+                            <TextBlock Grid.Row="0" Text="{Binding SelectedSub.TemplateId}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Имя шаблона: "/>
+                            <TextBlock Grid.Row="1" Text="{Binding SelectedSub.FileName}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Дата создания: "/>
+                            <TextBlock Grid.Row="2" Text="{Binding SelectedSub.CreationDate}"/>
+                        </StackPanel>
+                        <GroupBox Header="Метки:">
+                            <ListBox Grid.Row="3" Padding="15, 5, 0, 5" Margin="5,5,5,5" Height="150"
                              ItemsSource="{Binding SelectedSub.Data}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Key}"/>
-                                        <TextBlock Text="| - |"/>
-                                        <TextBlock Text="{Binding Value}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Key}"/>
+                                            <TextBlock Text=" - "/>
+                                            <TextBlock Text="{Binding Value}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </GroupBox>
                     </StackPanel>
                 </GroupBox>
             </Grid>

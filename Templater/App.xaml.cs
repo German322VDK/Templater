@@ -86,16 +86,14 @@ namespace Templater
 
             var testData = new Dictionary<string, string>();
 
-            string templateId = "6";
-
             testData.Add("Full FIO", "Петрова Ирина Васильевна");
             testData.Add("PassportSerial", "0514");
             testData.Add("PassportNumber", "756432");
 
             var data = new DataIntegrationEvent
             {
-                FileName = $"File 1",
-                TemplateId = templateId,
+                FileName = $"Паспорт.docx",
+                TemplateId = "6",
                 Data = testData
             };
 
