@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <Compile Remove="EventBus\**" />
+    <EmbeddedResource Remove="EventBus\**" />
+    <None Remove="EventBus\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EventBus\" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>

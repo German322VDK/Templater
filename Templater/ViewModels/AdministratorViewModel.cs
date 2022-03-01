@@ -1,14 +1,7 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Templater.Infrastructure.Commands;
@@ -292,38 +285,6 @@ namespace Templater.ViewModels
         #endregion
 
         #endregion
-
-        private Status GetStatus(string statuses)
-        {
-            Status status;
-
-            switch (statuses)
-            {
-                case "Новые файлы":
-                    status = Status.Unchecked;
-                    break;
-                case "Все файлы":
-                    status = Status.Unchecked;
-                    break;
-                case "Готовые к печати":
-                    status = Status.ReadyToPrint;
-                    break;
-                case "Отложенные файлы":
-                    status = Status.Deferred;
-                    break;
-                case "Распечатанные файлы":
-                    status = Status.Printed;
-                    break;
-                case "Очередь печати":
-                    status = Status.InPrintedQueue;
-                    break;
-                default:
-                    status = Status.Unchecked;
-                    break;
-            }
-
-            return status;
-        }
 
         private IStore<Document> _docs;
 

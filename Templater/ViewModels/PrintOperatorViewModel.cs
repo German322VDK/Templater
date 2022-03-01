@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -36,12 +37,9 @@ namespace Templater.ViewModels
         public ObservableCollection<Document> SelectedDocuments { get; set; } = new();
 
 
-        public System.Collections.IList SelectedItems
+        public IList SelectedItems
         {
-            get
-            {
-                return SelectedDocuments;
-            }
+            get => SelectedDocuments;
             set
             {
                 SelectedDocuments.Clear();
@@ -99,13 +97,10 @@ namespace Templater.ViewModels
 
         public ObservableCollection<Document> Docs
         {
-            get
-            {
-               return new ObservableCollection<Document>(Documents.Where(el => el.Status == Status.Unchecked&&el.InRegistry==false));
-             
-            }
+            get => new ObservableCollection<Document>(Documents.Where(el => el.Status == Status.Unchecked && el.InRegistry == false));
         }
-    private ICommand _LoadDocumentsСommand;
+
+        private ICommand _LoadDocumentsСommand;
 
         public ICommand LoadDocumentsСommand => _LoadDocumentsСommand
             ??= new LambdaCommand(OnLoadServersCommandExecuted, CanLoadServersCommandExecute);

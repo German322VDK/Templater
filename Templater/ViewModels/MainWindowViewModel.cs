@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Templater.ViewModels.Base;
+﻿using Templater.ViewModels.Base;
 
 namespace Templater.ViewModels
 {
@@ -16,8 +11,6 @@ namespace Templater.ViewModels
             get => _title;
             set => Set(ref _title, value);
         }
-
-
 
         public MainWindowViewModel()
         {

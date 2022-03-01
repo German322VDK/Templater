@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -11,8 +10,6 @@ using Templater.Infrastructure.Interfaces;
 using Templater.Infrastructure.Services.InDB;
 using Templater.Infrastructure.Services.InMemory;
 using Templater.Infrastructure.Services.RabbitMQ;
-using Templater.IntegrationEvents.Events;
-using Templater.IntegrationEvents.Handlers;
 using Templater.ViewModels;
 using Templator.DTO.DTOModels;
 using Templator.DTO.Models;
@@ -78,13 +75,6 @@ namespace Templater
 
             services.AddSingleton<IRabbitMQService, RabbitMQService>();
 
-            //services.AddTransient<IRabbitMQConnection, RabbitMQConnection>();
-
-            //services.AddTransient<GetDataIntegrationEventHandler>();
-
-            //services.AddTransient<IStore<Solution>, SolutionDBStore>();
-
-            //services.AddTransient<IMailService, DebugMailService>(); //создаём объект IMailService(DebugMailService) каждый раз новые
 
         }
 
@@ -92,36 +82,26 @@ namespace Templater
         {
             Services.GetRequiredService<TemplaterDbInitializer>().Initialize();
 
-           
-
             var service = Services.GetRequiredService<IRabbitMQService>();
 
             var testData = new Dictionary<string, string>();
 
             string templateId = "6";
 
-                testData.Add("Full FIO", "Петрова Ирина Васильевна");
-                testData.Add("PassportSerial", "0514");
-                testData.Add("PassportNumber", "756432");
+            testData.Add("Full FIO", "Петрова Ирина Васильевна");
+            testData.Add("PassportSerial", "0514");
+            testData.Add("PassportNumber", "756432");
 
+            var data = new DataIntegrationEvent
+            {
+                FileName = $"File 1",
+                TemplateId = templateId,
+                Data = testData
+            };
 
-                var data = new DataIntegrationEvent
-                {
-                    FileName = $"File 1",
-                    TemplateId = templateId,
-                    Data = testData
-                };
-
-
-                service.Publish(data);
-
-            
-
-
-            //service.Subscribe( );
+            service.Publish(data);
 
             base.OnStartup(e);
-
 
         }
     }
