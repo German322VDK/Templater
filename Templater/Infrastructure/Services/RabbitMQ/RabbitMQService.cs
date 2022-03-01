@@ -32,17 +32,17 @@ namespace Templater.Infrastructure.Services.RabbitMQ
             var connection = _connectionFactory.CreateConnection();
 
             var channel = connection.CreateModel();
-           
-                channel.QueueDeclarePassive(queueName);
 
-                var message = JsonConvert.SerializeObject(@event);
-                var body = Encoding.UTF8.GetBytes(message);
+            channel.QueueDeclarePassive(queueName);
 
-                channel.BasicPublish(exchange: "",
-                    routingKey: queueName,
-                    basicProperties: null,
-                    body: body);
-            
+            var message = JsonConvert.SerializeObject(@event);
+            var body = Encoding.UTF8.GetBytes(message);
+
+            channel.BasicPublish(exchange: "",
+                routingKey: queueName,
+                basicProperties: null,
+                body: body);
+
         }
 
         public void Subscribe(EventHandler<BasicDeliverEventArgs> @event)
