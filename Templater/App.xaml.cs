@@ -98,26 +98,24 @@ namespace Templater
 
             var testData = new Dictionary<string, string>();
 
-            for (int i = 0; i < 2; i++)
-            {
-                testData.Clear();
+            string templateId = "6";
 
-                for (int j = 0; j < 5; j++)
-                {
-                    testData.Add($"{i}-{j}", $"test-{j}");
-                }
-               
+                testData.Add("Full FIO", "Петрова Ирина Васильевна");
+                testData.Add("PassportSerial", "0514");
+                testData.Add("PassportNumber", "756432");
+
 
                 var data = new DataIntegrationEvent
                 {
-                    FileName = $"File{i}",
+                    FileName = $"File 1",
+                    TemplateId = templateId,
                     Data = testData
                 };
 
 
                 service.Publish(data);
 
-            }
+            
 
 
             //service.Subscribe( );

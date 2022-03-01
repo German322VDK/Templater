@@ -9,6 +9,9 @@ namespace Templator.DTO.Models
         public string FileName { get; set; }
 
         [JsonProperty]
+        public string TemplateId { get; set; }
+
+        [JsonProperty]
         public Dictionary<string, string> Data { get; set; } = new Dictionary<string, string>();
     }
 }

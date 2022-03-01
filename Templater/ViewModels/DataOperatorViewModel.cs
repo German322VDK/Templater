@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Templater.Infrastructure.Commands;
 using Templater.Infrastructure.Interfaces;
@@ -92,6 +94,55 @@ namespace Templater.ViewModels
 
         public DataOperatorViewModel()
         {
+        }
+
+        private ICommand _LoadDocumentsСommand;
+
+        public ICommand CreateDocumentСommand => _LoadDocumentsСommand
+            ??= new LambdaCommand(OnLoadServersCommandExecuted, CanLoadServersCommandExecute);
+
+        private bool CanLoadServersCommandExecute(object p) => true;
+
+        private async void OnLoadServersCommandExecuted(object p)
+        {
+            await DecisionToDoc();
+            OnPropertyChanged("Docs");
+        }
+
+
+        private async Task DecisionToDoc()
+        {
+            var item1 = _templateDB.GetById(int.Parse(SelectedSub.TemplateId));
+
+            var keys1 = item1.JSONKeys.FromJSONKeys().ToList();          
+
+            var result1 = await CreateDoc(item1, SelectedSub.Data);
+
+            Subs.Remove(SelectedSub);
+
+            
+        }
+
+        private async Task<bool> CreateDoc(Template item, Dictionary<string, string> keyVal)
+        {
+            var tempFN = item.FileName.Split(".")[0];
+
+            var dt = DateTime.Now;
+
+            var doc = new Document
+            {
+                FileName = $"{tempFN}---{dt.Year}-{dt.Month}-{dt.Day}--{dt.Hour}-{dt.Minute}-{dt.Second}.docx",
+                Template = item,
+                Status = Status.Unchecked,
+                JSONValues = keyVal.ToJSONKeyValue()
+            };
+
+
+            var result = await Task.Run(() =>
+                    WordMethods.CreateDoc($"Templates/{item.FileName}", $"Docs/{doc.FileName}", keyVal))
+                .ConfigureAwait(false);
+
+            return result;
         }
 
         //private ICollection<StSt> GetListData(Dictionary<string, string> keyValues)
