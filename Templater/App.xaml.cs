@@ -99,6 +99,23 @@ namespace Templater
 
             service.Publish(data);
 
+            testData.Clear();
+
+            testData.Add("<Full FIO Receiver>", "Петрова Ирина Васильевна");
+            testData.Add("<Full FIO Sender>", "Иванова Инна Артёмовна");
+            testData.Add("<AppealText>", "Взыскание долга");
+            testData.Add("<Full Date D>", DateTime.Now.ToString("g"));
+
+            var data1 = new DataIntegrationEvent
+            {
+                FileName = $"Обращение.docx",
+                TemplateId = "4",
+                Data = testData
+            };
+
+            service.Publish(data1);
+
+
             base.OnStartup(e);
 
         }

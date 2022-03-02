@@ -11,7 +11,7 @@
              DataContext="{Binding PrintOperatorModel, Source= {StaticResource Locator}}"
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
-        <GroupBox Header="{Binding Title}" FontSize="16" Margin="5">
+        <GroupBox >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -33,12 +33,6 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="0" Command="{Binding LoadDocumentsСommand}">
-                        <StackPanel Orientation="Horizontal" ToolTip="Загрузить документы готовые к печати" HorizontalAlignment="Left">
-                            <fa:ImageAwesome Icon="Solid_Download" Height="25" Margin="0,0,20,0" Foreground="#FF014BFF"/>
-                            <TextBlock Text="Загрузить документы" FontSize="18"/>
-                        </StackPanel>
-                    </Button>
                     <GroupBox Grid.Row="1" Header="Список документов на печать" FontSize="13" Width="300" Margin="10">
                         <ListBox Name="MyListView"  ItemsSource="{Binding Docs}"                                 
                                  Padding="15, 5, 0, 5" Margin="5,5,5,5"  SelectionMode="Multiple">
