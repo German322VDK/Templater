@@ -60,28 +60,52 @@ namespace Templater.ViewModels
                 return new ObservableCollection<Document>(Documents.Where(el => el.IsSelected));
             }
         }
+
+        private void ClearCheckboxes()
+        {                       
+
+                foreach (var checkbox in documents)
+                {
+                    checkbox.IsSelected = false;                  
+                }
+  
+        }
         public  ObservableCollection<Document> Documents
         {
             get
             {
                 if (SelectedStatus == "Новые файлы")
-                    return new ObservableCollection<Document>(documents.Where(el => el.Status == Status.Unchecked));
+                {
+                    ClearCheckboxes();
+                    return new ObservableCollection<Document>(documents.Where(el => el.Status == Status.Unchecked));            
+                }
 
                 if (SelectedStatus == "Все файлы")
-                    return documents;
+                {
+                    ClearCheckboxes();
+                    return documents;                   
+                }
 
                 if (SelectedStatus == Statuses[2])
+                {
+                    ClearCheckboxes();
                     return new ObservableCollection<Document>(documents.Where(el => el.Status == Status.ReadyToPrint));
-
+                }
                 if (SelectedStatus == "Отложенные файлы")
+                {
+                    ClearCheckboxes();
                     return new ObservableCollection<Document>(documents.Where(el => el.Status == Status.Deferred));
-
+                }
                 if (SelectedStatus == "Распечатанные файлы")
+                {
+                    ClearCheckboxes();
                     return new ObservableCollection<Document>(documents.Where(el => el.Status == Status.Printed));
-
+                }
                 if (SelectedStatus == "Очередь печати")
+                {
+                    ClearCheckboxes();
                     return new ObservableCollection<Document>(documents.Where(el => el.Status == Status.InPrintedQueue));
-
+                }
                 return documents;
             }  
         }
