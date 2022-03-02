@@ -115,6 +115,22 @@ namespace Templater
 
             service.Publish(data1);
 
+            testData.Clear();
+
+            testData.Add("метка 1", "Петрова Ирина Васильевна");
+            testData.Add(" метка 4", "Иванова Инна Артёмовна");
+            testData.Add("<AppealText>", "Взыскание долга");
+            testData.Add("<Full Date D>", DateTime.Now.ToString("g"));
+
+            var data2 = new DataIntegrationEvent
+            {
+                FileName = $"Обращение.docx",
+                TemplateId = "4",
+                Data = testData
+            };
+
+            service.Publish(data2);
+
 
             base.OnStartup(e);
 

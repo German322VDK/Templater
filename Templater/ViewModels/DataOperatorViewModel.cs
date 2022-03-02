@@ -151,11 +151,23 @@ namespace Templater.ViewModels
         {
             var item1 = _templateDB.GetById(int.Parse(SelectedSub.TemplateId));
 
-            var keys1 = item1.JSONKeys.FromJSONKeys().ToList();          
+            var keys1 = item1.JSONKeys.FromJSONKeys().ToList();
 
-            var result1 = await CreateDoc(item1, SelectedSub.Data);
+            var result = CheckMarks();
 
-            Subs.Remove(SelectedSub);
+            if (result)
+            {
+                var result1 = await CreateDoc(item1, SelectedSub.Data);
+
+                Subs.Remove(SelectedSub);
+            }
+
+            else
+            {
+                MessageBox.Show("Невозможно создать документ по данным меткам");
+            }
+
+            
 
             
         }
