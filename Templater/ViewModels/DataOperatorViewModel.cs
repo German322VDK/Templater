@@ -171,12 +171,15 @@ namespace Templater.ViewModels
                 FileName = $"{tempFN}---{dt.Year}-{dt.Month}-{dt.Day}--{dt.Hour}-{dt.Minute}-{dt.Second}.docx",
                 Template = item,
                 Status = Status.Unchecked,
-                JSONValues = keyVal.ToJSONKeyValue()
+                JSONValues = keyVal.ToJSONKeyValue(),
+                InRegistry = false
             };
 
             _documnetDB.Add(doc);
 
             _administratorViewModel.Documents.Add(doc);
+
+            _printViewModel.OnPropertyChanged("Docs");
 
             var result = await Task.Run(() =>
                     WordMethods.CreateDoc($"Templates/{item.FileName}", $"Docs/{doc.FileName}", keyVal))
@@ -193,8 +196,10 @@ namespace Templater.ViewModels
 
         private AdministratorViewModel _administratorViewModel;
 
+        private PrintOperatorViewModel _printViewModel;
+
         public DataOperatorViewModel(IStore<Template> templateDB, IStore<Document> documnetDB, IRabbitMQService service,
-            AdministratorViewModel administratorViewModel)
+            AdministratorViewModel administratorViewModel, PrintOperatorViewModel printViewModel)
         {
             _templateDB = templateDB;
 
@@ -203,6 +208,8 @@ namespace Templater.ViewModels
             _documnetDB = documnetDB;
 
             _administratorViewModel = administratorViewModel;
+
+            _printViewModel = printViewModel;
 
             Templates = new ObservableCollection<Template>(_templateDB.GetAll());
 

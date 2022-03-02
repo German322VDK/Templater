@@ -98,6 +98,8 @@ namespace Templater.ViewModels
         public ObservableCollection<Document> Docs
         {
             get => new ObservableCollection<Document>(Documents.Where(el => el.Status == Status.Unchecked && el.InRegistry == false));
+
+            //set => Documents.Add(value);
         }
 
         private ICommand _LoadDocumentsСommand;
