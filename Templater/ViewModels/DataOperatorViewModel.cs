@@ -177,7 +177,7 @@ namespace Templater.ViewModels
 
             _documnetDB.Add(doc);
 
-            _administratorViewModel.Documents.Add(doc);
+            PrintOperatorViewModel.Documents.Add(doc);
 
             _printViewModel.OnPropertyChanged("Docs");
 
