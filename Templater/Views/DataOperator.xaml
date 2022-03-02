@@ -44,22 +44,7 @@
                     <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5"/>
                 </Grid>-->
                 <!--<Grid Grid.Column="2" Grid.Row="1">
-                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5" Name="ValidTemplates" 
-                             ItemsSource="{Binding Templates}"
-                             SelectedItem="{Binding SelectedTemplate}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding FileName}"/>
-                                    <Button DataContext="{Binding DataOperatorModel, Source= {StaticResource Locator}}" 
-                                            Command="{Binding OpenFile}"
-                                            Margin="5, 0">
-                                        <fa:ImageAwesome Icon="Regular_FileWord" Height="15"/>
-                                    </Button>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                    
                 </Grid>-->
 
                 <StackPanel Orientation="Vertical">
@@ -116,7 +101,8 @@
                         <Button Margin="10,10,10,10" Background="Transparent" 
                         BorderThickness="1" Width="270" Height="50"
                         Command="{Binding CheckСommand}">
-                            <StackPanel Orientation="Horizontal" ToolTip="Открыть новый документ для печати" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal" ToolTip="Проверить документ на соответствие меткам" 
+                                        HorizontalAlignment="Left">
                                 <fa:ImageAwesome Icon="Solid_CheckCircle" Height="26" Margin="0,0,20,0" Foreground="#FF014BFF"/>
                                 <TextBlock Text="Проверить метки" FontSize="18"/>
                             </StackPanel>
@@ -134,21 +120,33 @@
             </Grid>
         </GroupBox>
         <GroupBox Grid.Column="1" Header="{Binding Title2}" FontSize="16" Margin="10, 0, 0, 0">
-            <DockPanel>
-                <Grid DockPanel.Dock="Top">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <GroupBox Grid.Row="0" Header="Заголовок" Padding="5" FontSize="13" Margin="10">
-                        <TextBox Height="26" VerticalContentAlignment="Center"/>
-                    </GroupBox>
-                    
-                </Grid>
-                <GroupBox Header="Файл" FontSize="13" Margin="10, 10, 10, 10">
-                    <TextBox Margin="5"/>
+            <StackPanel>
+                <GroupBox Header="Список шаблонов">
+                    <ListBox Grid.Row="0" Padding="15, 5, 0, 5" Margin="5,5,5,5" Name="ValidTemplates" 
+                             MinHeight="100" MaxHeight="220"
+                             ItemsSource="{Binding Templates}"
+                             SelectedItem="{Binding SelectedTemplate}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FileName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </GroupBox>
-            </DockPanel>
+
+                <Button  Margin="5, 0" Width="270" Height="50" Command="{Binding OpenFile}">
+                    <StackPanel Orientation="Horizontal" ToolTip="Открыть шаблон">
+                        <TextBlock Text="Открыть шаблон"/>
+                        <fa:ImageAwesome Icon="Regular_FileWord" Foreground="#FF0B9600" Margin="15, 0" Height="15"/>
+                    </StackPanel>
+                    
+                </Button>
+                <GroupBox Header="Метки" FontSize="13" Margin="10, 10, 10, 10">
+                    <ListBox ItemsSource="{Binding TemplateKeys}" MinHeight="100" MaxHeight="220"/>
+                </GroupBox>
+            </StackPanel>
         </GroupBox>
     </Grid>
 </UserControl>

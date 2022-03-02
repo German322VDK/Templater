@@ -21,7 +21,7 @@ namespace Templater.ViewModels
     {
         public string Title1 { get; } = "Проверка данных";
 
-        public string Title2 { get; } = "Документ";
+        public string Title2 { get; } = "Шаблоны";
 
         public string _titleCheck = "Не выбран";
 
@@ -39,7 +39,27 @@ namespace Templater.ViewModels
             set => Set(ref _isGood, value);
         }
 
-        public Template SelectedTemplate { get; set; }
+        public ObservableCollection<string> TemplateKeys { get; set; } = new();
+
+        private Template _selectedTemplate;
+
+        public Template SelectedTemplate 
+        { 
+            get => _selectedTemplate;
+            set 
+            {
+                Set(ref _selectedTemplate, value);
+
+                var data = _selectedTemplate.JSONKeys.FromJSONKeys();
+
+                TemplateKeys.Clear();
+
+                foreach (var item in data)
+                {
+                    TemplateKeys.Add(item);
+                }
+            }
+        }
 
         public static ObservableCollection<Template> Templates { get; set; }
 
