@@ -62,7 +62,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto" MinHeight="90"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Button Command ="{Binding RegistryAdd}" Grid.Row="0" Margin="0,20,0,20" Width="270">
@@ -83,14 +84,14 @@
                             <TextBlock Text="Печать реестра " FontSize="18"/>
                         </StackPanel>
                     </Button>
-                    <Button Command ="{Binding GetDeferred}" Grid.Row="3"  Width="270" Margin="0,32,0,351">
+                    <Button Command ="{Binding GetDeferred}" Grid.Row="3"  Width="270" Margin="0,32">
                         <StackPanel Orientation="Horizontal" ToolTip="Документ забракован" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Solid_Times" Height="25" Margin="0,0,20,0" Foreground="OrangeRed"/>
                             <TextBlock Text="Забраковать" FontSize="18"/>
                         </StackPanel>
                     </Button>
-                    <GroupBox Grid.Row="3" Header="Реестры в печати" FontSize="13" Margin="60,158,74,10">
-                        <ListBox ItemsSource ="{Binding Registrys}" SelectedItem="{Binding SelectedRegistry}"  Padding="15, 5, 0, 5" Height="236" HorizontalAlignment="Left" Width="285">
+                    <GroupBox Grid.Row="4" Header="Реестры в печати" FontSize="13" Margin="20,10" Grid.RowSpan="2">
+                        <ListBox ItemsSource ="{Binding Registrys}" SelectedItem="{Binding SelectedRegistry}"  Padding="15, 5, 0, 5" Margin="5">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

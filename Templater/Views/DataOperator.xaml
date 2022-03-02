@@ -107,7 +107,7 @@
                                 <TextBlock Text="Проверить метки" FontSize="18"/>
                             </StackPanel>
                         </Button>
-                        <Button Grid.Row="1" Margin="0,10" HorizontalAlignment="Center" Background="Transparent" 
+                        <Button Grid.Row="1" Margin="0, 10, 5, 0" HorizontalAlignment="Center" Background="Transparent" 
                                 BorderThickness="1" Width="270" Height="50" 
                                 Command="{Binding CreateDocumentСommand}">
                             <StackPanel Orientation="Horizontal" ToolTip="Отправить на печать" HorizontalAlignment="Left">
@@ -136,7 +136,7 @@
                     </ListBox>
                 </GroupBox>
 
-                <Button  Margin="5, 0" Width="270" Height="50" Command="{Binding OpenFile}">
+                <Button  Margin="5, 10" Width="270" Height="50" Command="{Binding OpenFile}">
                     <StackPanel Orientation="Horizontal" ToolTip="Открыть шаблон">
                         <TextBlock Text="Открыть шаблон"/>
                         <fa:ImageAwesome Icon="Regular_FileWord" Foreground="#FF0B9600" Margin="15, 0" Height="15"/>
