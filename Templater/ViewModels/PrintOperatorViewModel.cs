@@ -58,7 +58,7 @@ namespace Templater.ViewModels
         private bool CanGetReadyToPrintCommandExecute(object p) => SelectedDocuments.Count>0;
 
         private void OnGetReadyToPrintCommandExecuted(object p)
-        {            
+        {
             foreach (var document in SelectedDocuments)
             {
                 _documents.Update(document.Id, Status.ReadyToPrint);
@@ -69,6 +69,42 @@ namespace Templater.ViewModels
             OnPropertyChanged("Docs");
         }
 
+        private ICommand _getRegistryToPrint;
+
+        public ICommand GetRegistryToPrint => _getRegistryToPrint
+            ??= new LambdaCommand(OnGetRegistryToPrintCommandExecuted, CanGetRegistryToPrintCommandExecute);
+
+        private bool CanGetRegistryToPrintCommandExecute(object p) => SelectedRegistry is not null;
+
+        private void OnGetRegistryToPrintCommandExecuted(object p)
+        {           
+            foreach (var document in SelectedRegistry)
+            {
+                _documents.Update(document.Id, Status.ReadyToPrint);
+
+                Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.ReadyToPrint;
+                Registrys.Remove(SelectedRegistry);
+            }
+
+            OnPropertyChanged("Registrys");
+        }
+
+        private ICommand _getDeferred;
+
+        public ICommand GetDeferred => _getDeferred
+            ??= new LambdaCommand(OnGetDeferredCommandExecuted, CanGetDeferredCommandExecute);
+
+        private bool CanGetDeferredCommandExecute(object p) => SelectedDocuments.Count>0;
+
+        private void OnGetDeferredCommandExecuted(object p)
+        {
+            foreach (var document in SelectedDocuments)
+            {
+
+                Documents.SingleOrDefault(el => el.Id == document.Id).Status = Status.Deferred;
+                _documents.Update(document.Id, Status.Deferred);
+            }
+        }
 
         private ICommand _registryAdd;
 

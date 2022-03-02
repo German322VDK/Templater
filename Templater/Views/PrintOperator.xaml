@@ -16,7 +16,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>                    
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid.Resources>
                     <Style TargetType="Button">
@@ -62,28 +62,35 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" MinHeight="90"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Button Command ="{Binding RegistryAdd}" Grid.Row="0">
+                    <Button Command ="{Binding RegistryAdd}" Grid.Row="0" Margin="0,20,0,20" Width="270">
                         <StackPanel Orientation="Horizontal" ToolTip="Отправка документа в реестр печати" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Regular_ListAlt" Height="25" Margin="0,0,20,0" Foreground="#FF014BFF"/>
                             <TextBlock Text="Отправка в реестр" FontSize="18"/>
                         </StackPanel>
                     </Button>
-                    <Button Command="{Binding GetReadyToPrint}" Grid.Row="1">
+                    <Button Command="{Binding GetReadyToPrint}" Grid.Row="1" Margin="0,20,0,20" Width="270">
                         <StackPanel Orientation="Horizontal" ToolTip="Печать документа" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Solid_Print" Height="25" Margin="0,0,20,0" Foreground="#FF0B9600"/>
                             <TextBlock Text="Печать" FontSize="18"/>
                         </StackPanel>
                     </Button>
-                    <Button Grid.Row="2">
+                    <Button Command="{Binding GetRegistryToPrint}" Grid.Row="2" Margin="0,20,0,20" Width="270">
+                        <StackPanel Orientation="Horizontal" ToolTip="Печать реестра" HorizontalAlignment="Left">
+                            <fa:ImageAwesome Icon="Solid_Print" Height="25" Margin="0,0,20,0" Foreground="#FF0B9600"/>
+                            <TextBlock Text="Печать реестра " FontSize="18"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Command ="{Binding GetDeferred}" Grid.Row="3"  Width="270" Margin="0,32,0,351">
                         <StackPanel Orientation="Horizontal" ToolTip="Документ забракован" HorizontalAlignment="Left">
                             <fa:ImageAwesome Icon="Solid_Times" Height="25" Margin="0,0,20,0" Foreground="OrangeRed"/>
                             <TextBlock Text="Забраковать" FontSize="18"/>
                         </StackPanel>
                     </Button>
-                    <GroupBox Grid.Row="3" Header="Реестры в печати" FontSize="13" Width="300" Margin="10">
-                        <ListBox ItemsSource ="{Binding Registrys}" SelectedItem="{Binding SelectedRegistry}"  Padding="15, 5, 0, 5" Margin="5,5,5,5">
+                    <GroupBox Grid.Row="3" Header="Реестры в печати" FontSize="13" Margin="60,158,74,10">
+                        <ListBox ItemsSource ="{Binding Registrys}" SelectedItem="{Binding SelectedRegistry}"  Padding="15, 5, 0, 5" Height="236" HorizontalAlignment="Left" Width="285">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -96,15 +103,15 @@
                 </Grid>
                 <GroupBox Grid.Column="2" Header="Документы в реестре печати" FontSize="13" Width="300" Margin="10">
                     <ListBox ItemsSource="{Binding SelectedRegistry}" Padding="15, 5, 0, 5" Margin="5,5,5,5">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding FileName}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding FileName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
                     </ListBox>
-                </GroupBox>                
+                </GroupBox>
             </Grid>
         </GroupBox>
     </Grid>
